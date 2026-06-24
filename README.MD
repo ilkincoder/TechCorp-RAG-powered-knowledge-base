@@ -81,7 +81,6 @@ Qdrant (:6333)       n8n (:5678)
 │   ├── Security/
 │   └── gap_requests.json       # Knowledge gap request store (drafts stored inline)
 │
-├── n8n-workflow.json           # Audit workflow (direct REST calls, 7 nodes)
 ├── n8n-chat-workflow.json      # MCP chat workflow for complex queries
 ├── n8n-draft-generator.json    # Draft generation workflow (cron → DeepSeek)
 │
