@@ -1,0 +1,1663 @@
+{
+  "generated_at": "2026-06-23T00:19:07",
+  "num_questions": 24,
+  "pdfs_sampled": 8,
+  "baseline": {
+    "name": "V1 Naive Chunking",
+    "description": "RecursiveCharacterTextSplitter, chunk_size=500, overlap=50",
+    "metrics": {
+      "context_precision": 0.8372,
+      "context_recall": 0.9583,
+      "faithfulness": 0.8507,
+      "answer_relevancy": 0.9024,
+      "latency_ms": 1821.6,
+      "token_count": 2728
+    }
+  },
+  "parent_child": {
+    "name": "V2 Parent-Child Retrieval",
+    "description": "Two-pass: search fine-grained child chunks, return parent context",
+    "metrics": {
+      "context_precision": 0.8743,
+      "context_recall": 1.0,
+      "faithfulness": 0.9444,
+      "answer_relevancy": 0.9314,
+      "latency_ms": 1557.2,
+      "token_count": 4465
+    }
+  },
+  "traces": [
+    {
+      "query": "What is the critical threshold for API P95 latency?",
+      "source_pdf": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "service, route\n 3. Latency Thresholds\nAPI P50\n< 120ms — warning at 150ms, critical at 200ms\nAPI P95\n< 400ms — warning at 500ms, critical at 800ms\nAPI P99\n< 1,200ms — warning at 1.5s, critical at 2.5s\nLLM P95\n< 2,500ms — provider-dependent; alert on > 5s\nRAG Retrieval P95\n< 100ms — alert on > 200ms\nDB Query P95\n< 50ms — warning at 100ms, critical at 300ms\nIngestion Job\n< 60s per document — alert on > 120s\n4. CPU Usage Thresholds\nWarning\n70% sustained for 5 minutes — notification only\nCritical",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 0.9994
+          },
+          {
+            "text": "Burn Rate Alert\nFast burn: > 14.4x budget burn rate (1h window)\n 7. PagerDuty Alert Rules\nAlert Name\nSeverity\nRoute\nAuto-Resolve\nAPI P95 Critical\nHigh\nsre-oncall\nYes\nError Rate Critical\nHigh\nsre-oncall\nYes\nCPU Critical\nHigh\nsre-oncall\nYes\nDB Connection Exhausted\nCritical\nsre-oncall + DBA\nNo\nLLM Provider Failure\nHigh\nai-team\nYes\nSecurity Incident\nCritical\nsecurity-oncall\nNo\nData Pipeline Stalled\nMedium\ndata-eng\nYes\nDisk Usage > 85%\nMedium\nsre-oncall\nNo\n8. Escalation Flow",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 0.4974
+          },
+          {
+            "text": "Histogram\nRequest latency distribution\nmethod, route, percentile\nllm_tokens_used_total\nCounter\nLLM tokens consumed\nmodel, tenant, type\nllm_latency_seconds\nHistogram\nLLM call latency\nmodel, provider\nrag_retrieval_latency\nHistogram\nVector search latency\ncollection, k\nqueue_depth\nGauge\nJobs pending in processing queue\nqueue_name\nactive_connections\nGauge\nActive DB connections\ndb, pool\nerror_rate\nGauge\nError rate (5xx/total)\nservice, route\n 3. Latency Thresholds\nAPI P50",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 0.3461
+          },
+          {
+            "text": "1,024 tokens (configurable per use case)\nStreaming\nEnabled for interactive chat; disabled for batch processing\nRetry Policy\nExponential backoff — 3 retries, max 30s total\n9. Evaluation\nMetric\nTool\nTarget\nFrequency\nFaithfulness\nRAGAS\n> 0.85\nPer release\nAnswer Relevancy\nRAGAS\n> 0.80\nPer release\nContext Recall\nRAGAS\n> 0.78\nPer release\nLatency P95\nGrafana\n< 2.5s\nReal-time\nHallucination Rate\nCustom eval\n< 3%\nWeekly\nUser Rating\nIn-product thumbs\n4.2/5\nMonthly\n10. Feedback Loop",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.1862
+          },
+          {
+            "text": "Critical\n85% sustained for 2 minutes — page on-call SRE\nAuto-scale Trigger\n60% for 3 minutes — scale out by 2 instances\nScale-in Trigger\n30% for 15 minutes — scale in by 1 instance\nHard Limit\n95% — circuit breaker activates, new requests rejected\n5. Memory Usage\nWarning\n80% heap usage sustained 5 min — investigate for memory leaks\nCritical\n90% — page SRE; prepare to restart service\nOOM Kill\nAuto-restart enabled; PagerDuty alert + Slack notification\nDB Shared Buffers",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 0.0002
+          }
+        ],
+        "answer": "Based on the context, the critical threshold for API P95 latency is **800ms**. (Source: 06_TechCorp_Monitoring_Alerting_Guide.pdf)",
+        "retrieval_ms": 3560.3,
+        "generation_ms": 1450.0
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "method, route, percentile\nllm_tokens_used_total\nCounter\nLLM tokens consumed\nmodel, tenant, type\nllm_latency_seconds\nHistogram\nLLM call latency\nmodel, provider\nrag_retrieval_latency\nHistogram\nVector search latency\ncollection, k\nqueue_depth\nGauge\nJobs pending in processing queue\nqueue_name\nactive_connections\nGauge\nActive DB connections\ndb, pool\nerror_rate\nGauge\nError rate (5xx/total)\nservice, route\n 3. Latency Thresholds\nAPI P50\n< 120ms — warning at 150ms, critical at 200ms\nAPI P95\n< 400ms — warni",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "{       \n\"igroup\": {         \n\"uuid\": \"d19ec2fa-fec7-11e8-b23d-00a098e32c28\",         \n\"key\": \"e4f33f90-f75f-11e8-9ed9-00a098e3215f:type=igroup,uuid=d19ec2fa-fec7-11e8-b23d-00a098e32c28\",    \n\"name\": \"lun55_igroup\",         \n\"_links\": {           \n\"self\": {             \n\"href\": \"/api/datacenter/protocols/san/igroups/e4f33f90-f75f-11e8-9ed9-00a098e3215f:type=igroup, \nuuid=d19ec2fa-fec7-11e8-b23d-00a098e32c28\"           \n}         \n}       \n},       \n\"logical_unit_number\": 3     \n}   \n],   \n\"assig",
+            "source": "API DOCUMENTATION.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "7. PagerDuty Alert Rules\nAlert Name\nSeverity\nRoute\nAuto-Resolve\nAPI P95 Critical\nHigh\nsre-oncall\nYes\nError Rate Critical\nHigh\nsre-oncall\nYes\nCPU Critical\nHigh\nsre-oncall\nYes\nDB Connection Exhausted\nCritical\nsre-oncall + DBA\nNo\nLLM Provider Failure\nHigh\nai-team\nYes\nSecurity Incident\nCritical\nsecurity-oncall\nNo\nData Pipeline Stalled\nMedium\ndata-eng\nYes\nDisk Usage > 85%\nMedium\nsre-oncall\nNo\n8. Escalation Flow\nAlert Fires --> PagerDuty notifies on-call engineer (SMS + app push) T+5min: No\nacknowledg",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "• Mandatory payload filter on tenant_id before every search — enforced at query layer\n• Query expansion: user query + HyDE (Hypothetical Document Embedding) for better recall\n• MMR (Maximal Marginal Relevance) applied to reduce redundant results\n• Sub-100ms P95 retrieval latency target (excluding network)\n7. Reranking\nModel\ncross-encoder/ms-marco-MiniLM-L-6-v2 (self-hosted)\nInput\nQuery + top-20 retrieved chunks\nOutput\nRe-scored list; top-5 selected for context window\n Threshold\nChunks with reran",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "TechCorp Customer Escalation\nProcess\nTicket Prioritization, SLA & Resolution Workflow\nVersion: v1.9\nDocument: TC-ESC-007\nTechCorp Internal\n1. Ticket Priority Levels\nP1 – Critical\nProduction outage affecting multiple customers or data loss risk\nP2 – High\nCore feature broken; significant customer impact; no workaround\nP3 – Medium\nPartial functionality degraded; workaround exists\nP4 – Low\nMinor issue or cosmetic bug; business not impacted\nP5 – Enhancement\nFeature request or feedback; no service imp",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, the critical threshold for API P95 latency is **800ms**. (Source: 06_TechCorp_Monitoring_Alerting_Guide.pdf)",
+        "retrieval_ms": 31.3,
+        "generation_ms": 1047.7
+      }
+    },
+    {
+      "query": "What happens if CPU usage is sustained at 85% for 2 minutes?",
+      "source_pdf": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "Critical\n85% sustained for 2 minutes — page on-call SRE\nAuto-scale Trigger\n60% for 3 minutes — scale out by 2 instances\nScale-in Trigger\n30% for 15 minutes — scale in by 1 instance\nHard Limit\n95% — circuit breaker activates, new requests rejected\n5. Memory Usage\nWarning\n80% heap usage sustained 5 min — investigate for memory leaks\nCritical\n90% — page SRE; prepare to restart service\nOOM Kill\nAuto-restart enabled; PagerDuty alert + Slack notification\nDB Shared Buffers",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 0.9925
+          },
+          {
+            "text": "service, route\n 3. Latency Thresholds\nAPI P50\n< 120ms — warning at 150ms, critical at 200ms\nAPI P95\n< 400ms — warning at 500ms, critical at 800ms\nAPI P99\n< 1,200ms — warning at 1.5s, critical at 2.5s\nLLM P95\n< 2,500ms — provider-dependent; alert on > 5s\nRAG Retrieval P95\n< 100ms — alert on > 200ms\nDB Query P95\n< 50ms — warning at 100ms, critical at 300ms\nIngestion Job\n< 60s per document — alert on > 120s\n4. CPU Usage Thresholds\nWarning\n70% sustained for 5 minutes — notification only\nCritical",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 0.3879
+          },
+          {
+            "text": "Burn Rate Alert\nFast burn: > 14.4x budget burn rate (1h window)\n 7. PagerDuty Alert Rules\nAlert Name\nSeverity\nRoute\nAuto-Resolve\nAPI P95 Critical\nHigh\nsre-oncall\nYes\nError Rate Critical\nHigh\nsre-oncall\nYes\nCPU Critical\nHigh\nsre-oncall\nYes\nDB Connection Exhausted\nCritical\nsre-oncall + DBA\nNo\nLLM Provider Failure\nHigh\nai-team\nYes\nSecurity Incident\nCritical\nsecurity-oncall\nNo\nData Pipeline Stalled\nMedium\ndata-eng\nYes\nDisk Usage > 85%\nMedium\nsre-oncall\nNo\n8. Escalation Flow",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 0.0009
+          },
+          {
+            "text": "DB Shared Buffers\nMonitor hit ratio > 95%; alert if < 90%\nRedis Memory\nAlert at 80% maxmemory — triggers eviction policy review\n6. Error Rates\nError Budget\n99.9% SLO = 43.8 minutes downtime/month; 0.1% error budget\nWarning\nError rate > 0.5% over 5-minute window\nCritical\nError rate > 1% over 2-minute window — page SRE immediately\nLLM 5xx Rate\nAlert if provider error rate > 3% in 1 minute — activate fallback\n4xx Spike\nAlert on 50% increase in 4xx over 10-minute baseline\nBurn Rate Alert",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 0.0007
+          },
+          {
+            "text": "Those external dependencies can also include hardware constraints. \nWhen developing software for a very constraining system (e.g. CPU, memory, real time \nconstraints), it is preferable to start when the requirements are stable, and therefore be able to \noptimise it so Agile is not well suited. \n• \nTest: Is testing an increment at sprint or release level too expensive in terms of effort, time and \navailability or test means? Is test automation easy to put in place? Is the test effort compatible",
+            "source": "Engineering-handbook.pdf",
+            "score": 0.0
+          }
+        ],
+        "answer": "Based on the context, if CPU usage is sustained at 85% for 2 minutes, it triggers a **Critical** alert that will **page the on-call SRE**. (Source: 06_TechCorp_Monitoring_Alerting_Guide.pdf)",
+        "retrieval_ms": 221.7,
+        "generation_ms": 1927.5
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "method, route, percentile\nllm_tokens_used_total\nCounter\nLLM tokens consumed\nmodel, tenant, type\nllm_latency_seconds\nHistogram\nLLM call latency\nmodel, provider\nrag_retrieval_latency\nHistogram\nVector search latency\ncollection, k\nqueue_depth\nGauge\nJobs pending in processing queue\nqueue_name\nactive_connections\nGauge\nActive DB connections\ndb, pool\nerror_rate\nGauge\nError rate (5xx/total)\nservice, route\n 3. Latency Thresholds\nAPI P50\n< 120ms — warning at 150ms, critical at 200ms\nAPI P95\n< 400ms — warni",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Auto-scale Trigger\n60% for 3 minutes — scale out by 2 instances\nScale-in Trigger\n30% for 15 minutes — scale in by 1 instance\nHard Limit\n95% — circuit breaker activates, new requests rejected\n5. Memory Usage\nWarning\n80% heap usage sustained 5 min — investigate for memory leaks\nCritical\n90% — page SRE; prepare to restart service\nOOM Kill\nAuto-restart enabled; PagerDuty alert + Slack notification\nDB Shared Buffers\nMonitor hit ratio > 95%; alert if < 90%\nRedis Memory\nAlert at 80% maxmemory — trigger",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "}     \n}   \n},   \n\"recommended_performance_service_level\": {     \n\"key\": null,     \n\"name\": \"Idle\",     \n\"peak_iops\": null,     \n\"expected_iops\": null,     \n\"_links\": {}   \n},   \n\"assigned_storage_efficiency_policy\": {     \n\"key\": null,     \n\"name\": \"Unassigned\",     \n\"_links\": {}   \n},   \n\"space\": {     \n\"size\": 1024458752   \n},   \n\"os_type\": \"linux\",   \n\"_links\": {     \n\"self\": {       \n\"href\": \"/api/storage-provider/luns/f963839f-0f95-11ea-9963-00a098884af5%3Atype%3Dlun%2Cuuid%3D71f3187e- \nbf",
+            "source": "API DOCUMENTATION.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "the App Service Plan triggers a scale-out operation (such as adding two more workers), \nthe available workers are allocated from a pre-existing pool of ready-to-go workers. \nThese workers are already pre-provisioned and warm, so our service simply needs to \nget deployed on the worker. Once that happens, the worker is added to the rotation and \nthe front end can begin allocating traffic to it. This entire process is typically completed \nin just a few seconds.\nIn addition to the scaling options pr",
+            "source": "architecture-overview.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "5.8.3.11 Schedulability \nanalysis for real-time \nsoftware \nCoding, testing and \ndocumenting \nThis is done as part of the sprint. In this \npurpose, simulators could be used. For \nOBSW, for example, a real-time test bench \n ECSS-E-HB-40-01A \n7 April 2020 \n92 \nECSS-E-ST-40 \nrequirement \nAgile activities and \nmeetings \nRecommendation \ncould be useful for such analysis. \n5.8.3.12 Technical budgets \nmanagement \nReview meeting \nProduct backlog \nrefinement \nTechnical budgets, such as CPU utilization \nor",
+            "source": "Engineering-handbook.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "According to the context, if CPU usage is sustained at 85% for 2 minutes, this is a **Critical** threshold that triggers a page to the on-call SRE. (Source: 06_TechCorp_Monitoring_Alerting_Guide.pdf)",
+        "retrieval_ms": 22.9,
+        "generation_ms": 1559.9
+      }
+    },
+    {
+      "query": "What is the escalation step if an alert is not acknowledged after 15 minutes?",
+      "source_pdf": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "Medium\nsre-oncall\nNo\n8. Escalation Flow\nAlert Fires --> PagerDuty notifies on-call engineer (SMS + app push) T+5min: No\nacknowledgment --> escalate to secondary on-call T+15min: No acknowledgment -->\nnotify Engineering Manager T+30min: Unresolved Sev1 --> escalate to VP Engineering +\nCTO T+60min: Customer-impacting --> activate Customer Communications runbook T+2h:\nMajor incident declared --> War room bridge opened\n© 2026 TechCorp Inc. — Confidential & Proprietary",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 0.0907
+          },
+          {
+            "text": "6. Resolution Workflow\nStep 1: Ticket created in Zendesk --> auto-assigned to Tier 1 queue Step 2: Triage\nwithin SLA first-response time --> priority assigned Step 3: If P1/P2 --> immediate\nescalation to Tier 2, Slack alert in #escalations Step 4: Engineering creates JIRA\nticket linked to Zendesk case Step 5: Fix deployed --> customer notified with\nresolution note Step 6: CSAT survey sent 24h after ticket closure Step 7: P1/P2\nincidents require 5-day post-mortem in Notion",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.0545
+          },
+          {
+            "text": "customer’s business.\nAnticipated response time: 8 business hours\nAvailability: Monday – Friday 8 a.m. to 5 p.m. CT,  \nexcluding U.S. holidays\n Compass !or IBM Power VS Support \tan\u001fboo& | 11 \nThe customer may request hierarchical escalation during the Cobalt \nIron Support process when it is likely that resolution of an incident \nwill not be in a timely or satisfactory manner.  Use the Support \nTicketing system as the main point of communication, but use the",
+            "source": "customer-support-manual.pdf",
+            "score": 0.0056
+          },
+          {
+            "text": "[emergency-response-process-handling-danger-in-a-techcorp-office.pdf]\n# Emergency Response Process: Handling Danger in a TechCorp Office\n\n## Overview\n\nThis article outlines the standardized process for responding to emergencies involving immediate danger in any TechCorp office location. The goal is to ensure the safety of all employees, visitors, and contractors through clear, actionable steps. This procedure applies to threats such as fire, active shooter, medical emergencies, natural disasters",
+            "source": "emergency-response-process-handling-danger-in-a-techcorp-office.pdf",
+            "score": 0.0031
+          },
+          {
+            "text": "P5 – Enhancement\nFeature request or feedback; no service impact\n2. SLA Levels\nPriority\nFirst Response\nUpdate Cadence\nResolution Target\nBusiness Hours\nP1\n15 minutes\nEvery 30 min\n4 hours\n24/7\nP2\n1 hour\nEvery 2 hours\n8 hours\n24/7\nP3\n4 hours\nDaily\n3 business days\nBusiness hours\nP4\n8 hours\nWeekly\n10 business days\nBusiness hours\nP5\n2 business days\nAs needed\nNext quarter\nBusiness hours\n3. Escalation Matrix\nTier\nTeam\nHandles\nEscalates To\nTier 1\nSupport Agents\nP3–P5, FAQ, account, billing",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.0028
+          }
+        ],
+        "answer": "Based on the context, if an alert is not acknowledged after 15 minutes, it escalates to the secondary on-call engineer.\n\nSource: [06_TechCorp_Monitoring_Alerting_Guide.pdf]",
+        "retrieval_ms": 465.1,
+        "generation_ms": 1277.5
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "7. PagerDuty Alert Rules\nAlert Name\nSeverity\nRoute\nAuto-Resolve\nAPI P95 Critical\nHigh\nsre-oncall\nYes\nError Rate Critical\nHigh\nsre-oncall\nYes\nCPU Critical\nHigh\nsre-oncall\nYes\nDB Connection Exhausted\nCritical\nsre-oncall + DBA\nNo\nLLM Provider Failure\nHigh\nai-team\nYes\nSecurity Incident\nCritical\nsecurity-oncall\nNo\nData Pipeline Stalled\nMedium\ndata-eng\nYes\nDisk Usage > 85%\nMedium\nsre-oncall\nNo\n8. Escalation Flow\nAlert Fires --> PagerDuty notifies on-call engineer (SMS + app push) T+5min: No\nacknowledg",
+            "source": "06_TechCorp_Monitoring_Alerting_Guide.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "· Determine immediate threat level: Is it life-threatening? Is it escalating?\n  · If safe to do so, alert others nearby using a loud, clear voice or by activating the nearest fire alarm (if fire o\n2. Activate the Emergency Response\n  · Call 911 (or local emergency number) immediately if the danger is imminent or life-threatening.\n  · Notify TechCorp Security via the emergency hotline: [Insert Phone Number] or via the internal emergency\n  · Use the building·s emergency communication system (e.g.,",
+            "source": "emergency-response-process-handling-danger-in-a-techcorp-office.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Support Team\nResolution Confirmation:\nSubject: Resolved — [Brief Description] — Ticket #[ID] Hi [Customer Name], We've\nresolved the issue affecting [describe impact]. Root cause: [brief RCA]. Prevention\nmeasures: [what we're doing to prevent recurrence]. A detailed post-mortem will\nfollow within [X] business days.\n6. Resolution Workflow\nStep 1: Ticket created in Zendesk --> auto-assigned to Tier 1 queue Step 2: Triage\nwithin SLA first-response time --> priority assigned Step 3: If P1/P2 --> imme",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "or desired modifications with no critical impact on the \ncustomer’s business.\nAnticipated response time: 8 business hours\nAvailability: Monday – Friday 8 a.m. to 5 p.m. CT,  \nexcluding U.S. holidays\n Compass !or IBM Power VS Support \tan\u001fboo& | 11 \nThe customer may request hierarchical escalation during the Cobalt \nIron Support process when it is likely that resolution of an incident \nwill not be in a timely or satisfactory manner.  Use the Support \nTicketing system as the main point of communica",
+            "source": "customer-support-manual.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "• Any SLA breach must be formally documented within 48 hours of discovery\n• Service credits claimed within 30 days of breach; tracked in Vendor Registry\nEscalation thresholds:\n1st Breach\nFormal written notice; vendor must provide RCA within 5 business days\n2nd Breach\nExecutive escalation call; vendor presents remediation plan\n3rd Breach\nContract review triggered; vendor placed on probation status\n4th Breach\nTechCorp may invoke termination for cause; transition planning begins\n8. Data Security & ",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, if an alert is not acknowledged after 15 minutes, it is escalated to the secondary on-call engineer.\n\nSource: 06_TechCorp_Monitoring_Alerting_Guide.pdf",
+        "retrieval_ms": 24.8,
+        "generation_ms": 2022.1
+      }
+    },
+    {
+      "query": "What is the policy for flights that are six hours or more?",
+      "source_pdf": "travel-and-expenses-policy.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "Flights Less Than Six Hours \nFlights less than six hours must be booked at economy cabin fares. Ancillary fees to purchase premium \neconomy cabin seats are not reimbursable.  \n \nFlights Six Hours or More (authorization required) \nAir travel more than six hours (excludes ground time in connection airports) may be booked at the lowest \nlogical fare offered in the next available cabin (may be Premium Economy, Business, or First class) between \napplicable airports.",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.9976
+          },
+          {
+            "text": "Flights Six Hours or More (authorization required) ............................................................................................................................... 4 \nUpgrades ................................................................................................................................................................................................. 4",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.9571
+          },
+          {
+            "text": "Traveler Limitations \nBecause of the inherent risks of air travel, the number of ENA employees traveling together on one flight should \nbe limited as follows: no more than two (2) staff officers on the same flight and no more than eight (8) employees \ntotal on one flight, without prior authorization by the Chief Operations Officer.  \n \nCabin Allowance \nCabin allowance is determined by total flight time, not to include time on the ground at a connecting airport. \n \nFlights Less Than Six Hours",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.7286
+          },
+          {
+            "text": "Travelers experiencing canceled flights, delays of four or more hours, misconnections, or disruption due to \ninvoluntary denied boarding (oversold flight) should seek assistance from Direct Travel, Direct2Usm mobile \napp, and/or the airline. \n \nTravelers experiencing disruptions that delay or prevent the business purpose of the travel, or cause an \nunexpected overnight in either direction, should immediately notify their supervisor or staff coordinating",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0881
+          },
+          {
+            "text": "Cabin Allowance........................................................................................................................................................................................... 4 \nFlights Less Than Six Hours .................................................................................................................................................................... 4",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0658
+          }
+        ],
+        "answer": "For flights six hours or more (excluding ground time at connecting airports), authorization is required, and the flight may be booked at the lowest logical fare offered in the next available cabin (Premium Economy, Business, or First class) between applicable airports.\n\nSource: travel-and-expenses-policy.pdf",
+        "retrieval_ms": 284.0,
+        "generation_ms": 1472.0
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "All fares exceeding $550 require review and approval prior to ticketing. \n \nTraveler Limitations \nBecause of the inherent risks of air travel, the number of ENA employees traveling together on one flight should \nbe limited as follows: no more than two (2) staff officers on the same flight and no more than eight (8) employees \ntotal on one flight, without prior authorization by the Chief Operations Officer.  \n \nCabin Allowance \nCabin allowance is determined by total flight time, not to include ti",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Flights Less Than Six Hours .................................................................................................................................................................... 4 \nFlights Six Hours or More (authorization required) ............................................................................................................................... 4 \nUpgrades .................................................................................................................",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "authorized by the Chief Operations Officer. International travel outside North America must be booked by \ncontacting the Direct Travel agent team via phone or email. Authorized agent assisted transactions must be \ncompleted within Direct Travel hours of operation (see table above).  \n \n \n \n  \n4 \n \nAdvance Purchase \nAir travel must be booked a minimum of 21 days prior to departure, unless authorized to travel for business \nthat occurs less than 21 days from travel authorization.  \n \nRefundability",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "travel disruption are reimbursable, per the limits and guidelines in this policy. \n \nVoluntary Disruptions - Denied Boarding/Voluntary Flight Changes \nTravelers approached by the airline to volunteer their seat on an oversold flight in return for denied boarding \ncompensation vouchers may volunteer provided that the travel delay does not impact on time arrival or \nparticipation in their designated travel purpose. Denied boarding compensation vouchers or tickets are the \nproperty of the traveler.",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "access during flights should be used for the purpose of conducting high-priority, time sensitive ENA business \nduring the flight.  \n \nOther optional airline fees for airline club lounge access, premium economy seats, priority boarding, or on-\nboard entertainment are not reimbursable expenses. \n \n \n \n  \n5 \n \nTravel Disruptions and Exceptions \nInvoluntary Disruptions - Canceled Flights/Delays/Denied Boarding \nTravelers experiencing canceled flights, delays of four or more hours, misconnections, or",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, for flights six hours or more (excluding ground time at connecting airports), air travel may be booked at the lowest logical fare offered in the next available cabin (which may be Premium Economy, Business, or First class). Authorization is required.\n\nSource: [travel-and-expenses-policy.pdf]",
+        "retrieval_ms": 27.4,
+        "generation_ms": 1508.5
+      }
+    },
+    {
+      "query": "What is the name of the travel management company mentioned in the policy?",
+      "source_pdf": "travel-and-expenses-policy.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "reimbursable expenses. \n \nPolicy Background: \nThis policy was created to define specific parameters for staff and volunteer travel, identify and describe allowable \ntravel expense reimbursement. Anything outside of this policy must be approved by the Chief Operations Officer. \n \nProtocols:  \nSection I: General Travel \n1. TRAVEL MANAGEMENT COMPANY (DIRECT TRAVEL) \nThe current contracted Travel Management Company (TMC) or travel agency is Direct Travel. The primary",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.9793
+          },
+          {
+            "text": "1. \nTRAVEL MANAGEMENT COMPANY (DIRECT TRAVEL) ............................................................................................................................. 3 \nSAP Concur Online Booking Tool Access:…………………………………………………………………………………………………………….. 3 \nDirect Travel Contact Information ............................................................................................................................................................... 3",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.6501
+          },
+          {
+            "text": "Revised: 12/16/25 \n \n \n \n \n \n \n \n \n2026 Staff/Volunteer Travel and Expense Policy \n \n \n \n \n \n \n  \n2 \n \nPolicy Index \n \nPolicy Background: .......................................................................................................................................................................................................... 3",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.1056
+          },
+          {
+            "text": "parameters of the meal allowance described in this policy. All other incidental hotel charges are the \nresponsibility of the traveler and will not be reimbursed. \n \n4. TRAVEL REWARD/AFFINITY PROGRAMS  \nPersonal \nRewards points and frequent flyer miles accrued to personal traveler accounts because of ENA business travel \nare the property of the traveler. ENA will not compensate for miles or points used for travel or upgrades on ENA \nbusiness travel.  \n \n \n \n  \n8 \n \nCorporate",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0595
+          },
+          {
+            "text": "purposes of the ENA travel and expense policy, incidentals do not include miscellaneous food and beverage or \nother personal care items. Receipts are not required but travelers will be required to itemize the type and amount \nof each gratuity or tip expensed for each day in their expense reimbursement requests. Gratuities or tips related \nto taxi, other ground transportation, or food service are reimbursable as part of the total cost in the appropriately",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0063
+          }
+        ],
+        "answer": "The travel management company mentioned in the policy is Direct Travel. (Source: travel-and-expenses-policy.pdf)",
+        "retrieval_ms": 289.5,
+        "generation_ms": 1229.3
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Revised: 12/16/25 \n \n \n \n \n \n \n \n \n2026 Staff/Volunteer Travel and Expense Policy \n \n \n \n \n \n \n  \n2 \n \nPolicy Index \n \nPolicy Background: .......................................................................................................................................................................................................... 3 \nProtocols: .................................................................................................................................................",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Section III: Corporate Credit Card ............................................................................................................................................................................ 10 \n \n \n  \n3 \n \nPolicy Purpose:  \nThe objective of this policy is to define and outline the Emergency Nurses Association (ENA) travel program and \nreimbursable expenses. \n \nPolicy Background: \nThis policy was created to define specific parameters for staff and volunteer travel, identify and ",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "travel disruption are reimbursable, per the limits and guidelines in this policy. \n \nVoluntary Disruptions - Denied Boarding/Voluntary Flight Changes \nTravelers approached by the airline to volunteer their seat on an oversold flight in return for denied boarding \ncompensation vouchers may volunteer provided that the travel delay does not impact on time arrival or \nparticipation in their designated travel purpose. Denied boarding compensation vouchers or tickets are the \nproperty of the traveler.",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "to taxi, other ground transportation, or food service are reimbursable as part of the total cost in the appropriately \nrelated category as outlined in this policy. \n \nTravel to destinations outside of the U.S. may require higher reimbursement allowances for meals and \nincidentals. Foreign allowance amounts will vary by nation and region, influenced by the economic conditions \nspecific to each area. ENA uses current allowance amounts established and updated annually by the U.S. \ngovernment for go",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "international travel on ENA business are reimbursable expenses.  \n \nTrusted Traveler Programs \nTrusted Traveler Program (Global Entry, TSA Pre-check, or Clear Pre-check) enrollment fees are reimbursable \nfor travelers expected to take more than 5 trips in a year for ENA business, based on the requirements of their \njob or volunteer position requirements. ENA will reimburse the fee for one program per qualifying traveler up \nto $100 in a five-year period.  \n \nSpouse/Partner Travel  \nTravel costs ",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the provided context, the travel management company is Direct Travel. [travel-and-expenses-policy.pdf]",
+        "retrieval_ms": 26.3,
+        "generation_ms": 1306.5
+      }
+    },
+    {
+      "query": "What are the two types of automobile travel mentioned?",
+      "source_pdf": "travel-and-expenses-policy.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "AUTOMOBILE TRAVEL ................................................................................................................................................................................. 5 \nAuthorization ................................................................................................................................................................................................ 5",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.1164
+          },
+          {
+            "text": "RAIL/GROUND TRAVEL ............................................................................................................................................................................... 6 \nRail ................................................................................................................................................................................................................ 6",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0091
+          },
+          {
+            "text": "Limo/Sedan................................................................................................................................................................................................... 7 \nRideshare ...................................................................................................................................................................................................... 7 \n3.",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0076
+          },
+          {
+            "text": "with ENA business travel in one ticket. Travelers with personal travel dates adjacent to ENA travel dates \nshould contact the staff liaison coordinating the meeting or the Director, Meetings and Events for direction \non which portions of travel will be funded by ENA and should be booked with the Direct Travel. \n \nAUTOMOBILE TRAVEL \nAuthorization \nAll automobile travel (personal vehicle or rental car) for ENA business requires authorization from the",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0048
+          },
+          {
+            "text": "trip distance (miles traveled) from the origin point to destination and return trip as applicable (e.g., SAP Concur \nExpense Mileage calculator, Google Maps, MapQuest, or similar mapping, mileage documentation tools).   \n \nRental Car  \nRental cars may be used in situations where the meeting or business purpose is not reasonably served by other \ntransportation (taxis/shuttles or public transit) and requires authorization by the management staff with \noversight of the applicable budget.",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0044
+          }
+        ],
+        "answer": "Based on the provided context, the two types of automobile travel mentioned are **personal vehicle** and **rental car**.\n\nSource: travel-and-expenses-policy.pdf",
+        "retrieval_ms": 320.2,
+        "generation_ms": 1114.2
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Involuntary Disruptions - Canceled Flights/Delays/Denied Boarding ................................................................................................... 5 \nVoluntary Disruptions - Denied Boarding/Voluntary Flight Changes ................................................................................................... 5 \nTrip Cancellation/Unused Tickets ..................................................................................................................................",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Revised: 12/16/25 \n \n \n \n \n \n \n \n \n2026 Staff/Volunteer Travel and Expense Policy \n \n \n \n \n \n \n  \n2 \n \nPolicy Index \n \nPolicy Background: .......................................................................................................................................................................................................... 3 \nProtocols: .................................................................................................................................................",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Public Transit ................................................................................................................................................................................................ 6 \nLimo/Sedan................................................................................................................................................................................................... 7 \nRideshare ......................................................................",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "SAP Concur Online Booking Tool Access:…………………………………………………………………………………………………………….. 3 \nDirect Travel Contact Information ............................................................................................................................................................... 3 \nHours of Operation ....................................................................................................................................................................................... 3 \nMobile Trave",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "direction and instruction on booking procedures and expense reimbursement allowances. \n \nPersonal travel to destinations other than the location of the meeting or business purpose is not combinable \nwith ENA business travel in one ticket. Travelers with personal travel dates adjacent to ENA travel dates \nshould contact the staff liaison coordinating the meeting or the Director, Meetings and Events for direction \non which portions of travel will be funded by ENA and should be booked with the Dire",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, the two types of automobile travel mentioned are **personal vehicle** and **rental car**.\n\nSource: travel-and-expenses-policy.pdf",
+        "retrieval_ms": 21.1,
+        "generation_ms": 1103.2
+      }
+    },
+    {
+      "query": "What is the default chunking strategy and its parameters?",
+      "source_pdf": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "Metadata Extraction\nTitle, author, created_at, file_type, tenant_id, tags\nPre-processing\nRemove headers/footers, normalize whitespace, fix encoding\nStatus Tracking\nAsync job queue (Celery + Redis); webhook on completion\n3. Chunking Strategy\n• Default strategy: Recursive Character Text Splitter — chunk size 512 tokens, overlap 64 tokens\n• Semantic chunking (sentence-boundary aware) used for legal and medical documents",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.985
+          },
+          {
+            "text": "• Hierarchical chunking: parent chunk (1024 tokens) stored alongside child chunks for context\nexpansion\n• Tables and code blocks treated as atomic chunks — never split mid-structure\n• Each chunk stores: content, chunk_index, parent_doc_id, token_count, page_number\n• Minimum chunk size: 50 tokens — smaller fragments are merged with adjacent chunks\n 4. Embedding Model\nPrimary Model\ntext-embedding-3-large (OpenAI) — 3072 dimensions\nFallback Model",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.0048
+          },
+          {
+            "text": "• Top-K = 20 candidates retrieved initially, reduced to top-5 after reranking\n• Mandatory payload filter on tenant_id before every search — enforced at query layer\n• Query expansion: user query + HyDE (Hypothetical Document Embedding) for better recall\n• MMR (Maximal Marginal Relevance) applied to reduce redundant results\n• Sub-100ms P95 retrieval latency target (excluding network)\n7. Reranking\nModel\ncross-encoder/ms-marco-MiniLM-L-6-v2 (self-hosted)\nInput\nQuery + top-20 retrieved chunks\nOutput",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.0003
+          },
+          {
+            "text": "• Capacity or size.\n• Online or offline setting.\n• Storage Efficiency Policy.\n• Performance Service Level.\n• Access control list (ACL) settings.\n• Export policy settings. You can also delete export policy parameters and revert the default (empty) export \npolicy rules on the file share.\nNote: During a single API run, you can update only one parameter.\nThis procedure describes adding a Performance Service Level to a file share. You can use the same",
+            "source": "API DOCUMENTATION.pdf",
+            "score": 0.0003
+          },
+          {
+            "text": "Input\nQuery + top-20 retrieved chunks\nOutput\nRe-scored list; top-5 selected for context window\n Threshold\nChunks with rerank score < 0.4 are discarded\nLatency Budget\n< 150ms for reranking pass\nFallback\nIf reranker unavailable, use raw retrieval scores\n8. LLM Integration\nPrimary Model\nclaude-sonnet-4 (Anthropic)\nFallback\ngpt-4o (OpenAI) — activated if Anthropic API errors > 3% in 1 min\nTemperature\n0.2 for factual Q&A; 0.7 for summarization\nMax Output\n1,024 tokens (configurable per use case)",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.0001
+          }
+        ],
+        "answer": "The default chunking strategy is **Recursive Character Text Splitter** with a chunk size of **512 tokens** and an overlap of **64 tokens**.\n\nSource: 04_TechCorp_RAG_Pipeline_Documentation.pdf",
+        "retrieval_ms": 211.6,
+        "generation_ms": 1940.2
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Metadata Extraction\nTitle, author, created_at, file_type, tenant_id, tags\nPre-processing\nRemove headers/footers, normalize whitespace, fix encoding\nStatus Tracking\nAsync job queue (Celery + Redis); webhook on completion\n3. Chunking Strategy\n• Default strategy: Recursive Character Text Splitter — chunk size 512 tokens, overlap 64 tokens\n• Semantic chunking (sentence-boundary aware) used for legal and medical documents\n• Hierarchical chunking: parent chunk (1024 tokens) stored alongside child chun",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "TechCorp RAG Pipeline\nDocumentation\nRetrieval-Augmented Generation Architecture & Operations\nVersion: v1.8\nDocument: TC-RAG-004\nTechCorp Internal\n1. System Architecture\nTechCorp's RAG pipeline is a multi-stage system that transforms raw documents into grounded, accurate\nLLM responses. The pipeline is built on a microservices architecture with each stage independently\nscalable.\n[Document Sources] --> [Ingestion Service] --> [Chunking Engine] --> [Embedding\nService] --> [Vector DB (Qdrant)] | [Use",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Batch Size\n128 chunks per API call — optimal cost/latency trade-off\nNormalization\nL2 normalized before storage\nMultilingual\nparaphrase-multilingual-mpnet-base-v2 for non-English docs\nRe-embedding\nTriggered when model version is upgraded (full re-index)\nCost Control\nToken caching: embeddings cached 30 days by content hash\n5. Vector Database\nEngine\nQdrant 1.9 — self-hosted on EKS, 3-node cluster\nDistance Metric\nCosine similarity\nCollections\nOne collection per tenant (namespace isolation)\nPayload F",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "• Mandatory payload filter on tenant_id before every search — enforced at query layer\n• Query expansion: user query + HyDE (Hypothetical Document Embedding) for better recall\n• MMR (Maximal Marginal Relevance) applied to reduce redundant results\n• Sub-100ms P95 retrieval latency target (excluding network)\n7. Reranking\nModel\ncross-encoder/ms-marco-MiniLM-L-6-v2 (self-hosted)\nInput\nQuery + top-20 retrieved chunks\nOutput\nRe-scored list; top-5 selected for context window\n Threshold\nChunks with reran",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "TechCorp Prompt Engineering\nStandards\nGuidelines for LLM Prompt Design & Management\nVersion: v2.0\nDocument: TC-PE-003\nTechCorp Internal\n1. Prompt Writing Principles\nAll prompts deployed to production must follow TechCorp's Clarity-Context-Constraint framework (C3).\nEvery prompt should be clear about the task, provide sufficient context for grounding, and constrain the\nmodel to the expected output format.\n• Be explicit: never assume the model will infer intent from ambiguous wording\n• Use positiv",
+            "source": "03_TechCorp_Prompt_Engineering_Standards.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, the default chunking strategy is the Recursive Character Text Splitter with a chunk size of 512 tokens and an overlap of 64 tokens. (Source: 04_TechCorp_RAG_Pipeline_Documentation.pdf)",
+        "retrieval_ms": 27.0,
+        "generation_ms": 1611.6
+      }
+    },
+    {
+      "query": "What is the primary embedding model and its dimensionality?",
+      "source_pdf": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "• Hierarchical chunking: parent chunk (1024 tokens) stored alongside child chunks for context\nexpansion\n• Tables and code blocks treated as atomic chunks — never split mid-structure\n• Each chunk stores: content, chunk_index, parent_doc_id, token_count, page_number\n• Minimum chunk size: 50 tokens — smaller fragments are merged with adjacent chunks\n 4. Embedding Model\nPrimary Model\ntext-embedding-3-large (OpenAI) — 3072 dimensions\nFallback Model",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.3191
+          },
+          {
+            "text": "• Implement eBPF-based network observability (Cilium) — Q4\n8. AI Improvements\nEmbedding Models\nEvaluate and adopt text-embedding-3-large across all tenants (Q2)\nReranker\nDeploy ColBERT v2 reranker — +8% precision on internal benchmarks (Q3)\nEvaluation Suite\nExpand RAGAS benchmark to 500 test cases (Q2)\nFine-tuning\nCustomer-specific fine-tuned models for top 10 enterprise accounts (Q3)\nMulti-modal\nImage + PDF visual understanding via GPT-4o Vision (Q4)\nAgentic Features",
+            "source": "10_TechCorp_Quarterly_Engineering_Roadmap.pdf",
+            "score": 0.0024
+          },
+          {
+            "text": "Fallback Model\nsentence-transformers/all-mpnet-base-v2 — self-hosted\nBatch Size\n128 chunks per API call — optimal cost/latency trade-off\nNormalization\nL2 normalized before storage\nMultilingual\nparaphrase-multilingual-mpnet-base-v2 for non-English docs\nRe-embedding\nTriggered when model version is upgraded (full re-index)\nCost Control\nToken caching: embeddings cached 30 days by content hash\n5. Vector Database\nEngine\nQdrant 1.9 — self-hosted on EKS, 3-node cluster\nDistance Metric\nCosine similarity",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.0001
+          },
+          {
+            "text": "• Top-K = 20 candidates retrieved initially, reduced to top-5 after reranking\n• Mandatory payload filter on tenant_id before every search — enforced at query layer\n• Query expansion: user query + HyDE (Hypothetical Document Embedding) for better recall\n• MMR (Maximal Marginal Relevance) applied to reduce redundant results\n• Sub-100ms P95 retrieval latency target (excluding network)\n7. Reranking\nModel\ncross-encoder/ms-marco-MiniLM-L-6-v2 (self-hosted)\nInput\nQuery + top-20 retrieved chunks\nOutput",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.0001
+          },
+          {
+            "text": "Input\nQuery + top-20 retrieved chunks\nOutput\nRe-scored list; top-5 selected for context window\n Threshold\nChunks with rerank score < 0.4 are discarded\nLatency Budget\n< 150ms for reranking pass\nFallback\nIf reranker unavailable, use raw retrieval scores\n8. LLM Integration\nPrimary Model\nclaude-sonnet-4 (Anthropic)\nFallback\ngpt-4o (OpenAI) — activated if Anthropic API errors > 3% in 1 min\nTemperature\n0.2 for factual Q&A; 0.7 for summarization\nMax Output\n1,024 tokens (configurable per use case)",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.0
+          }
+        ],
+        "answer": "The primary embedding model is **text-embedding-3-large (OpenAI)** with **3072 dimensions** (source: 04_TechCorp_RAG_Pipeline_Documentation.pdf).",
+        "retrieval_ms": 140.9,
+        "generation_ms": 1194.0
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Metadata Extraction\nTitle, author, created_at, file_type, tenant_id, tags\nPre-processing\nRemove headers/footers, normalize whitespace, fix encoding\nStatus Tracking\nAsync job queue (Celery + Redis); webhook on completion\n3. Chunking Strategy\n• Default strategy: Recursive Character Text Splitter — chunk size 512 tokens, overlap 64 tokens\n• Semantic chunking (sentence-boundary aware) used for legal and medical documents\n• Hierarchical chunking: parent chunk (1024 tokens) stored alongside child chun",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Batch Size\n128 chunks per API call — optimal cost/latency trade-off\nNormalization\nL2 normalized before storage\nMultilingual\nparaphrase-multilingual-mpnet-base-v2 for non-English docs\nRe-embedding\nTriggered when model version is upgraded (full re-index)\nCost Control\nToken caching: embeddings cached 30 days by content hash\n5. Vector Database\nEngine\nQdrant 1.9 — self-hosted on EKS, 3-node cluster\nDistance Metric\nCosine similarity\nCollections\nOne collection per tenant (namespace isolation)\nPayload F",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "• Implement eBPF-based network observability (Cilium) — Q4\n8. AI Improvements\nEmbedding Models\nEvaluate and adopt text-embedding-3-large across all tenants (Q2)\nReranker\nDeploy ColBERT v2 reranker — +8% precision on internal benchmarks (Q3)\nEvaluation Suite\nExpand RAGAS benchmark to 500 test cases (Q2)\nFine-tuning\nCustomer-specific fine-tuned models for top 10 enterprise accounts (Q3)\nMulti-modal\nImage + PDF visual understanding via GPT-4o Vision (Q4)\nAgentic Features\nTool-calling agent framewor",
+            "source": "10_TechCorp_Quarterly_Engineering_Roadmap.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "• Mandatory payload filter on tenant_id before every search — enforced at query layer\n• Query expansion: user query + HyDE (Hypothetical Document Embedding) for better recall\n• MMR (Maximal Marginal Relevance) applied to reduce redundant results\n• Sub-100ms P95 retrieval latency target (excluding network)\n7. Reranking\nModel\ncross-encoder/ms-marco-MiniLM-L-6-v2 (self-hosted)\nInput\nQuery + top-20 retrieved chunks\nOutput\nRe-scored list; top-5 selected for context window\n Threshold\nChunks with reran",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "RESTRICT, email TEXT NOT NULL, role user_role NOT NULL DEFAULT 'member', created_at\nTIMESTAMPTZ NOT NULL DEFAULT NOW(), updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\ndeleted_at TIMESTAMPTZ ); CREATE UNIQUE INDEX uq_users_tenant_email ON\nusers(tenant_id, email) WHERE deleted_at IS NULL; CREATE INDEX idx_users_tenant_id ON\nusers(tenant_id);\n9. ER Diagram (Text-Based)\ntenants (1) II< users (N) tenants (1) II< api_keys (N) users (1) II< sessions (N)\nusers (1) II< audit_logs (N) tenants (1) II< subs",
+            "source": "02_TechCorp_Database_Schema_Guide.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "The primary embedding model is **text-embedding-3-large (OpenAI)** with **3072 dimensions**.\n\nSource: 04_TechCorp_RAG_Pipeline_Documentation.pdf",
+        "retrieval_ms": 24.1,
+        "generation_ms": 1409.5
+      }
+    },
+    {
+      "query": "What is the reranker model and what score threshold is used to discard chunks?",
+      "source_pdf": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "Input\nQuery + top-20 retrieved chunks\nOutput\nRe-scored list; top-5 selected for context window\n Threshold\nChunks with rerank score < 0.4 are discarded\nLatency Budget\n< 150ms for reranking pass\nFallback\nIf reranker unavailable, use raw retrieval scores\n8. LLM Integration\nPrimary Model\nclaude-sonnet-4 (Anthropic)\nFallback\ngpt-4o (OpenAI) — activated if Anthropic API errors > 3% in 1 min\nTemperature\n0.2 for factual Q&A; 0.7 for summarization\nMax Output\n1,024 tokens (configurable per use case)",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.9929
+          },
+          {
+            "text": "• Top-K = 20 candidates retrieved initially, reduced to top-5 after reranking\n• Mandatory payload filter on tenant_id before every search — enforced at query layer\n• Query expansion: user query + HyDE (Hypothetical Document Embedding) for better recall\n• MMR (Maximal Marginal Relevance) applied to reduce redundant results\n• Sub-100ms P95 retrieval latency target (excluding network)\n7. Reranking\nModel\ncross-encoder/ms-marco-MiniLM-L-6-v2 (self-hosted)\nInput\nQuery + top-20 retrieved chunks\nOutput",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.3977
+          },
+          {
+            "text": "• Implement eBPF-based network observability (Cilium) — Q4\n8. AI Improvements\nEmbedding Models\nEvaluate and adopt text-embedding-3-large across all tenants (Q2)\nReranker\nDeploy ColBERT v2 reranker — +8% precision on internal benchmarks (Q3)\nEvaluation Suite\nExpand RAGAS benchmark to 500 test cases (Q2)\nFine-tuning\nCustomer-specific fine-tuned models for top 10 enterprise accounts (Q3)\nMulti-modal\nImage + PDF visual understanding via GPT-4o Vision (Q4)\nAgentic Features",
+            "source": "10_TechCorp_Quarterly_Engineering_Roadmap.pdf",
+            "score": 0.0102
+          },
+          {
+            "text": "Fallback Model\nsentence-transformers/all-mpnet-base-v2 — self-hosted\nBatch Size\n128 chunks per API call — optimal cost/latency trade-off\nNormalization\nL2 normalized before storage\nMultilingual\nparaphrase-multilingual-mpnet-base-v2 for non-English docs\nRe-embedding\nTriggered when model version is upgraded (full re-index)\nCost Control\nToken caching: embeddings cached 30 days by content hash\n5. Vector Database\nEngine\nQdrant 1.9 — self-hosted on EKS, 3-node cluster\nDistance Metric\nCosine similarity",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.0008
+          },
+          {
+            "text": "• Hierarchical chunking: parent chunk (1024 tokens) stored alongside child chunks for context\nexpansion\n• Tables and code blocks treated as atomic chunks — never split mid-structure\n• Each chunk stores: content, chunk_index, parent_doc_id, token_count, page_number\n• Minimum chunk size: 50 tokens — smaller fragments are merged with adjacent chunks\n 4. Embedding Model\nPrimary Model\ntext-embedding-3-large (OpenAI) — 3072 dimensions\nFallback Model",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 0.0002
+          }
+        ],
+        "answer": "Based on the context, the reranker model is **cross-encoder/ms-marco-MiniLM-L-6-v2 (self-hosted)**. Chunks with a rerank score **below 0.4** are discarded. (Source: 04_TechCorp_RAG_Pipeline_Documentation.pdf)",
+        "retrieval_ms": 148.7,
+        "generation_ms": 1392.0
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "• Mandatory payload filter on tenant_id before every search — enforced at query layer\n• Query expansion: user query + HyDE (Hypothetical Document Embedding) for better recall\n• MMR (Maximal Marginal Relevance) applied to reduce redundant results\n• Sub-100ms P95 retrieval latency target (excluding network)\n7. Reranking\nModel\ncross-encoder/ms-marco-MiniLM-L-6-v2 (self-hosted)\nInput\nQuery + top-20 retrieved chunks\nOutput\nRe-scored list; top-5 selected for context window\n Threshold\nChunks with reran",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Metadata Extraction\nTitle, author, created_at, file_type, tenant_id, tags\nPre-processing\nRemove headers/footers, normalize whitespace, fix encoding\nStatus Tracking\nAsync job queue (Celery + Redis); webhook on completion\n3. Chunking Strategy\n• Default strategy: Recursive Character Text Splitter — chunk size 512 tokens, overlap 64 tokens\n• Semantic chunking (sentence-boundary aware) used for legal and medical documents\n• Hierarchical chunking: parent chunk (1024 tokens) stored alongside child chun",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Streaming\nEnabled for interactive chat; disabled for batch processing\nRetry Policy\nExponential backoff — 3 retries, max 30s total\n9. Evaluation\nMetric\nTool\nTarget\nFrequency\nFaithfulness\nRAGAS\n> 0.85\nPer release\nAnswer Relevancy\nRAGAS\n> 0.80\nPer release\nContext Recall\nRAGAS\n> 0.78\nPer release\nLatency P95\nGrafana\n< 2.5s\nReal-time\nHallucination Rate\nCustom eval\n< 3%\nWeekly\nUser Rating\nIn-product thumbs\n4.2/5\nMonthly\n10. Feedback Loop\n• User thumbs-up/down captured per response, stored in feedback_e",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Batch Size\n128 chunks per API call — optimal cost/latency trade-off\nNormalization\nL2 normalized before storage\nMultilingual\nparaphrase-multilingual-mpnet-base-v2 for non-English docs\nRe-embedding\nTriggered when model version is upgraded (full re-index)\nCost Control\nToken caching: embeddings cached 30 days by content hash\n5. Vector Database\nEngine\nQdrant 1.9 — self-hosted on EKS, 3-node cluster\nDistance Metric\nCosine similarity\nCollections\nOne collection per tenant (namespace isolation)\nPayload F",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "TechCorp RAG Pipeline\nDocumentation\nRetrieval-Augmented Generation Architecture & Operations\nVersion: v1.8\nDocument: TC-RAG-004\nTechCorp Internal\n1. System Architecture\nTechCorp's RAG pipeline is a multi-stage system that transforms raw documents into grounded, accurate\nLLM responses. The pipeline is built on a microservices architecture with each stage independently\nscalable.\n[Document Sources] --> [Ingestion Service] --> [Chunking Engine] --> [Embedding\nService] --> [Vector DB (Qdrant)] | [Use",
+            "source": "04_TechCorp_RAG_Pipeline_Documentation.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, the reranker model is **cross-encoder/ms-marco-MiniLM-L-6-v2** (self-hosted), and chunks with a rerank score **< 0.4** are discarded.\n\nSource: [04_TechCorp_RAG_Pipeline_Documentation.pdf]",
+        "retrieval_ms": 26.5,
+        "generation_ms": 1509.2
+      }
+    },
+    {
+      "query": "What is the recommended solution for software access according to the document?",
+      "source_pdf": "it-onboarding.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "recommended to be accessed in this way. The officially supported and recommended \nsolution for software access is to use the Citrix Workspace App, which is a virtual \napplication environment. \nImportant \nAccessing your local computer files from within virtual application workspaces will require \nconfiguring your computer to connect to the U: drive, which is auto-mapped from any \nvirtual application in Citrix. Note that you will need a VPN Connection when accessing",
+            "source": "it-onboarding.pdf",
+            "score": 0.9995
+          },
+          {
+            "text": "computational resources are not fully utilized from within a browser. For this reason, \naccessing apps in the web browser is recommended for basic use only: \nThe list below is a snapshot of the software available to you. For any questions about \naccess or use, please feel free to reach out using the information in the sidebar. \nSoftware List \nCloud Subscriptions \nVideo Conferencing, Chat, and Team Collaboration \n1. Widely used cloud applications that can easily be self-installed.",
+            "source": "it-onboarding.pdf",
+            "score": 0.4535
+          },
+          {
+            "text": "end of the project. \nWith regard to software reuse, two aspects are taken into consideration. As the requirements can \nevolve, the choices for software reuse can evolve accordingly. Hence it is recommended to maintain \nthe Software Reuse File as a living document. The second aspect is that due to reduced level of control \nover the reused part of the software, the scope of applying the Agile process on functionality provided \nby the reused software may be limited.",
+            "source": "Engineering-handbook.pdf",
+            "score": 0.1144
+          },
+          {
+            "text": "these working files off-campus. \nSee Manually Connecting to your Home Directory on Mac. \nSee Manually Connecting to your Home Directory on Windows. \nLocal Installations \n While much of the software can be accessed virtually, there are cases where software \nmay be recommended for a local installation: \nVirtual Apps in Web Browser \nYou can launch applications in your web browser. While this is also a virtual environment,",
+            "source": "it-onboarding.pdf",
+            "score": 0.0194
+          },
+          {
+            "text": "Software Release document.  \nTaking into account in an Agile context, there can be a delivery at the end of each iteration, then the \nSoftware Release Document is provided, containing an overview of the release, the evolution since the \nprevious version and known problems. Most of this information can be extracted automatically from \nthe tools supporting the stories (e.g. requirements), the problem reports and the tracking of what is \nactually ‘done’.",
+            "source": "Engineering-handbook.pdf",
+            "score": 0.0049
+          }
+        ],
+        "answer": "According to the context, the officially supported and recommended solution for software access is to use the Citrix Workspace App, which is a virtual application environment. (Source: it-onboarding.pdf)",
+        "retrieval_ms": 287.3,
+        "generation_ms": 1238.4
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Email Setup for Android \nEmail Setup for iOS \nUsing VPN to Access Clemson Resources Off-campus \nAccessing certain Clemson resources from off-campus will require a VPN connection to \nthe Clemson network. Such resources include shared drive space or launching site-\nlicensed software programs installed locally. See introductory prerequisites to get the \ninstaller, and see how to Connect to the VPN for additional help. \nSoftware Access \nVirtual Apps using Citrix \nAlthough a few applications are avai",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "this activity corresponds to the creation of two documents: the Software Configuration File and the \nSoftware Release document.  \nTaking into account in an Agile context, there can be a delivery at the end of each iteration, then the \nSoftware Release Document is provided, containing an overview of the release, the evolution since the \nprevious version and known problems. Most of this information can be extracted automatically from \nthe tools supporting the stories (e.g. requirements), the probl",
+            "source": "Engineering-handbook.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Relationship with the system development lifecycle .................................. 74 \n7.3.4 \nReviews and milestones identification and associated documentation ...... 74 \n7.4 \nSoftware engineering standards and techniques .................................................... 74 \n7.5 \nSoftware development and software testing environment ....................................... 74 \n7.6 \nSoftware documentation plan .................................................................................",
+            "source": "Engineering-handbook.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "configuration change and the establishing of a new requirements baseline is produced at each \niteration, it is recommended that the elements of the SCF are provided also at the end of each iteration. \nAn option can be to join its contents with the ones of the Software Release Document. \nConfiguration verification (see ECSS-M-ST-40 clause 5.3.4) is the process of determining, by \nverification of project material and reports, that each Software Item under configuration control meets \n ECSS-E-HB-40",
+            "source": "Engineering-handbook.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "reviews shall mark the transition between phases. ECSS-E-ST-40, however, leaves some flexibility to \ndecide the level of completion of each phase and each review. More specifically 5.3.2.1 states \n“5.3.2.1 \na. \nThe software supplier shall define and follow a software life cycle including phases, their inputs \nand outputs, and joint reviews, in accordance with the overall project constraints and with ECSS‐\nM‐ST‐10.” \nb. \nThe life cycle shall be chosen, assessing the specifics of the project techn",
+            "source": "Engineering-handbook.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "According to the context, the officially supported and recommended solution for software access is to use the Citrix Workspace App, which is a virtual application environment. (Source: it-onboarding.pdf)",
+        "retrieval_ms": 25.0,
+        "generation_ms": 1408.4
+      }
+    },
+    {
+      "query": "What is required to access certain Clemson resources from off-campus?",
+      "source_pdf": "it-onboarding.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "Using VPN to Access Clemson Resources Off-campus \nAccessing certain Clemson resources from off-campus will require a VPN connection to \nthe Clemson network. Such resources include shared drive space or launching site-\nlicensed software programs installed locally. See introductory prerequisites to get the \ninstaller, and see how to Connect to the VPN for additional help. \nSoftware Access \nVirtual Apps using Citrix \nAlthough a few applications are available for local installations, most are not",
+            "source": "it-onboarding.pdf",
+            "score": 0.9999
+          },
+          {
+            "text": "yourusername@clemson.edu. To access your email from that point forward, simply log in \nwith those credentials using the Office 365 Portal and click on Outlook. There, you will be \nable to monitor, send, and receive email. To set up this mailbox on your smartphone or \ncomputer, here are some help guides: \nEmail setup for Apple Mail or Outlook for Mac OS \nEmail Setup for Android \nEmail Setup for iOS \nUsing VPN to Access Clemson Resources Off-campus",
+            "source": "it-onboarding.pdf",
+            "score": 0.9742
+          },
+          {
+            "text": "Student IT Onboarding Packet \nPlease see our CORE Students Page for updated information as this document may \nchange. \nPrerequisite Downloads | Configurations \nTo prepare yourself, you can download, run, and set some things up before ever getting to \ncampus. \nClemson Username, Password, and XID \nUpon acceptance, new students are assigned a Username, and this is a permanent, \nunique identifier used to access Clemson computers, networks, and web resources.",
+            "source": "it-onboarding.pdf",
+            "score": 0.8855
+          },
+          {
+            "text": "Duo 2-Factor Authentication \nClemson web systems and user information are secured with Duo Two-factor \nAuthentication (2FA). Duo's mobile app will therefore be required to access many of our \nweb information systems (e.g., iROAR/Banner, Canvas). \nAfter you have set up your username with a new password, you should install and \nconfigure Duo using the instructions on this page. \nWiFi Connection to Eduroam \nEduroam is an international wireless network and therefore allows for internet access at",
+            "source": "it-onboarding.pdf",
+            "score": 0.2468
+          },
+          {
+            "text": "all supporting institutions. As such, logging in does require your full Clemson domain \naddress (e.g., username@clemson.edu). \nNote: some systems may require running the installer prior to authentication. See \nIntroductory Prerequisites for WiFi installers. \nSee connecting to Eduroam on Mac. \nSee connecting to Eduroam on Windows. \nEmail \nDuring the onboarding process mentioned above, you will set a new password for your \nprovided username. Your official Clemson email address will be",
+            "source": "it-onboarding.pdf",
+            "score": 0.1244
+          }
+        ],
+        "answer": "Based on the context, accessing certain Clemson resources from off-campus requires a VPN connection to the Clemson network. (Source: it-onboarding.pdf)",
+        "retrieval_ms": 197.6,
+        "generation_ms": 1545.2
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Email Setup for Android \nEmail Setup for iOS \nUsing VPN to Access Clemson Resources Off-campus \nAccessing certain Clemson resources from off-campus will require a VPN connection to \nthe Clemson network. Such resources include shared drive space or launching site-\nlicensed software programs installed locally. See introductory prerequisites to get the \ninstaller, and see how to Connect to the VPN for additional help. \nSoftware Access \nVirtual Apps using Citrix \nAlthough a few applications are avai",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "all supporting institutions. As such, logging in does require your full Clemson domain \naddress (e.g., username@clemson.edu). \nNote: some systems may require running the installer prior to authentication. See \nIntroductory Prerequisites for WiFi installers. \nSee connecting to Eduroam on Mac. \nSee connecting to Eduroam on Windows. \nEmail \nDuring the onboarding process mentioned above, you will set a new password for your \nprovided username. Your official Clemson email address will be \n youruserna",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Student IT Onboarding Packet \nPlease see our CORE Students Page for updated information as this document may \nchange. \nPrerequisite Downloads | Configurations \nTo prepare yourself, you can download, run, and set some things up before ever getting to \ncampus. \nClemson Username, Password, and XID \nUpon acceptance, new students are assigned a Username, and this is a permanent, \nunique identifier used to access Clemson computers, networks, and web resources. \nLocate your Clemson username and reset y",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "With this information, you can complete the onboarding process to receive your username \nand set your initial password. \nShould you need to set your reset your Clemson password in the future, please use \nthe Password Change Utility. \nIncoming students can request a physical ID card, and setup a mobile wallet with their ID, \non or after June 2 of each calendar year. To do so, please follow the process here. \nDuo 2-Factor Authentication \nClemson web systems and user information are secured with Du",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "configuring your computer to connect to the U: drive, which is auto-mapped from any \nvirtual application in Citrix. Note that you will need a VPN Connection when accessing \nthese working files off-campus. \nSee Manually Connecting to your Home Directory on Mac. \nSee Manually Connecting to your Home Directory on Windows. \nLocal Installations \n While much of the software can be accessed virtually, there are cases where software \nmay be recommended for a local installation: \nVirtual Apps in Web Brow",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, accessing certain Clemson resources from off-campus requires a VPN connection to the Clemson network. Such resources include shared drive space or launching site-licensed software programs installed locally. [it-onboarding.pdf]",
+        "retrieval_ms": 26.0,
+        "generation_ms": 2021.7
+      }
+    },
+    {
+      "query": "How should incoming students log in to Eduroam WiFi?",
+      "source_pdf": "it-onboarding.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "all supporting institutions. As such, logging in does require your full Clemson domain \naddress (e.g., username@clemson.edu). \nNote: some systems may require running the installer prior to authentication. See \nIntroductory Prerequisites for WiFi installers. \nSee connecting to Eduroam on Mac. \nSee connecting to Eduroam on Windows. \nEmail \nDuring the onboarding process mentioned above, you will set a new password for your \nprovided username. Your official Clemson email address will be",
+            "source": "it-onboarding.pdf",
+            "score": 0.8418
+          },
+          {
+            "text": "Locate your Clemson username and reset your password \nInstall and setup Clemson Two-factor authentication with Duo. \nDownload and run the WiFi installer for Eduroam. \nTip: download this before coming on campus as a backup. \nDownload/Install the VPN client. \nDownload/Install the Citrix client and Log in. \nConfigure U: drive: See highlighted section below. \n In your acceptance packet, you will find your XID and your username activation code.",
+            "source": "it-onboarding.pdf",
+            "score": 0.7224
+          },
+          {
+            "text": "Duo 2-Factor Authentication \nClemson web systems and user information are secured with Duo Two-factor \nAuthentication (2FA). Duo's mobile app will therefore be required to access many of our \nweb information systems (e.g., iROAR/Banner, Canvas). \nAfter you have set up your username with a new password, you should install and \nconfigure Duo using the instructions on this page. \nWiFi Connection to Eduroam \nEduroam is an international wireless network and therefore allows for internet access at",
+            "source": "it-onboarding.pdf",
+            "score": 0.0528
+          },
+          {
+            "text": "With this information, you can complete the onboarding process to receive your username \nand set your initial password. \nShould you need to set your reset your Clemson password in the future, please use \nthe Password Change Utility. \nIncoming students can request a physical ID card, and setup a mobile wallet with their ID, \non or after June 2 of each calendar year. To do so, please follow the process here. \nDuo 2-Factor Authentication",
+            "source": "it-onboarding.pdf",
+            "score": 0.0061
+          },
+          {
+            "text": "Student IT Onboarding Packet \nPlease see our CORE Students Page for updated information as this document may \nchange. \nPrerequisite Downloads | Configurations \nTo prepare yourself, you can download, run, and set some things up before ever getting to \ncampus. \nClemson Username, Password, and XID \nUpon acceptance, new students are assigned a Username, and this is a permanent, \nunique identifier used to access Clemson computers, networks, and web resources.",
+            "source": "it-onboarding.pdf",
+            "score": 0.0
+          }
+        ],
+        "answer": "According to the context, logging into Eduroam requires your full Clemson domain address (e.g., username@clemson.edu). Some systems may require running the WiFi installer prior to authentication. See the specific guides for Mac or Windows connections.\n\nSource: it-onboarding.pdf",
+        "retrieval_ms": 202.2,
+        "generation_ms": 1639.8
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "With this information, you can complete the onboarding process to receive your username \nand set your initial password. \nShould you need to set your reset your Clemson password in the future, please use \nthe Password Change Utility. \nIncoming students can request a physical ID card, and setup a mobile wallet with their ID, \non or after June 2 of each calendar year. To do so, please follow the process here. \nDuo 2-Factor Authentication \nClemson web systems and user information are secured with Du",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "all supporting institutions. As such, logging in does require your full Clemson domain \naddress (e.g., username@clemson.edu). \nNote: some systems may require running the installer prior to authentication. See \nIntroductory Prerequisites for WiFi installers. \nSee connecting to Eduroam on Mac. \nSee connecting to Eduroam on Windows. \nEmail \nDuring the onboarding process mentioned above, you will set a new password for your \nprovided username. Your official Clemson email address will be \n youruserna",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Student IT Onboarding Packet \nPlease see our CORE Students Page for updated information as this document may \nchange. \nPrerequisite Downloads | Configurations \nTo prepare yourself, you can download, run, and set some things up before ever getting to \ncampus. \nClemson Username, Password, and XID \nUpon acceptance, new students are assigned a Username, and this is a permanent, \nunique identifier used to access Clemson computers, networks, and web resources. \nLocate your Clemson username and reset y",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Email Setup for Android \nEmail Setup for iOS \nUsing VPN to Access Clemson Resources Off-campus \nAccessing certain Clemson resources from off-campus will require a VPN connection to \nthe Clemson network. Such resources include shared drive space or launching site-\nlicensed software programs installed locally. See introductory prerequisites to get the \ninstaller, and see how to Connect to the VPN for additional help. \nSoftware Access \nVirtual Apps using Citrix \nAlthough a few applications are avai",
+            "source": "it-onboarding.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "The Information Security and Data policies provide everyone (staff, students, third parties, \ncontractors, consultants etc.) with clear and consistent instructions on how to protect \nthemselves, others and College Technology assets (e.g. data and services). The policies, \nassociated processes and procedures are designed to reduce information-related risk to \ntolerable levels.  \n \nThe College is committed to compliance with GDPR and UK Data Protection Act 2018 and \nto ensure that the College’s Da",
+            "source": "security-policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "According to the context, incoming students should log in to Eduroam WiFi using their full Clemson domain address (e.g., username@clemson.edu). Some systems may require running the installer prior to authentication.\n\nSource: it-onboarding.pdf",
+        "retrieval_ms": 24.4,
+        "generation_ms": 2126.5
+      }
+    },
+    {
+      "query": "What is the first response SLA for a P1 priority ticket?",
+      "source_pdf": "07_TechCorp_Customer_Escalation_Process.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "6. Resolution Workflow\nStep 1: Ticket created in Zendesk --> auto-assigned to Tier 1 queue Step 2: Triage\nwithin SLA first-response time --> priority assigned Step 3: If P1/P2 --> immediate\nescalation to Tier 2, Slack alert in #escalations Step 4: Engineering creates JIRA\nticket linked to Zendesk case Step 5: Fix deployed --> customer notified with\nresolution note Step 6: CSAT survey sent 24h after ticket closure Step 7: P1/P2\nincidents require 5-day post-mortem in Notion",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.9938
+          },
+          {
+            "text": "P5 – Enhancement\nFeature request or feedback; no service impact\n2. SLA Levels\nPriority\nFirst Response\nUpdate Cadence\nResolution Target\nBusiness Hours\nP1\n15 minutes\nEvery 30 min\n4 hours\n24/7\nP2\n1 hour\nEvery 2 hours\n8 hours\n24/7\nP3\n4 hours\nDaily\n3 business days\nBusiness hours\nP4\n8 hours\nWeekly\n10 business days\nBusiness hours\nP5\n2 business days\nAs needed\nNext quarter\nBusiness hours\n3. Escalation Matrix\nTier\nTeam\nHandles\nEscalates To\nTier 1\nSupport Agents\nP3–P5, FAQ, account, billing",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.9846
+          },
+          {
+            "text": "TechCorp Customer Escalation\nProcess\nTicket Prioritization, SLA & Resolution Workflow\nVersion: v1.9\nDocument: TC-ESC-007\nTechCorp Internal\n1. Ticket Priority Levels\nP1 – Critical\nProduction outage affecting multiple customers or data loss risk\nP2 – High\nCore feature broken; significant customer impact; no workaround\nP3 – Medium\nPartial functionality degraded; workaround exists\nP4 – Low\nMinor issue or cosmetic bug; business not impacted\nP5 – Enhancement",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.9184
+          },
+          {
+            "text": "Sev 3\nDegraded performance, single tenant affected — engineering ticket same day\nSev 4\nMinor bug, no data loss — standard sprint process\n5. Communication Templates\nInitial P1 Response (within 15 min):\nSubject: [URGENT] We're investigating your reported issue — Ticket #[ID] Hi [Customer\nName], Thank you for reaching out. We've received your report and our engineering\nteam is actively investigating. We'll provide a status update within 30 minutes.",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.8988
+          },
+          {
+            "text": "4. SLA Requirements by Tier\nThe following minimum SLA requirements must be contractually guaranteed by vendors in each tier.\nFailure to meet these thresholds triggers the remediation process in Section 7.\nMetric\nTier 1 (Critical)\nTier 2 (Important)\nTier 3 (Standard)\nUptime Guarantee\n99.99% / month\n99.9% / month\n99.5% / month\nPlanned Maintenance\n72h advance notice\n48h advance notice\n24h advance notice\nIncident Response\n15 min (P1)\n1 hour (P1)\n4 hours (P1)\nResolution Target\n4 hours (P1)",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.4919
+          }
+        ],
+        "answer": "The first response SLA for a P1 priority ticket is **15 minutes** (Source: 07_TechCorp_Customer_Escalation_Process.pdf, SLA Levels table).",
+        "retrieval_ms": 133.2,
+        "generation_ms": 1608.3
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "TechCorp Customer Escalation\nProcess\nTicket Prioritization, SLA & Resolution Workflow\nVersion: v1.9\nDocument: TC-ESC-007\nTechCorp Internal\n1. Ticket Priority Levels\nP1 – Critical\nProduction outage affecting multiple customers or data loss risk\nP2 – High\nCore feature broken; significant customer impact; no workaround\nP3 – Medium\nPartial functionality degraded; workaround exists\nP4 – Low\nMinor issue or cosmetic bug; business not impacted\nP5 – Enhancement\nFeature request or feedback; no service imp",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Tier 2 for P1–P2\nTier 2\nTechnical Support\nP2–P3, API issues, integrations\nTier 3 for unresolved\nTier 3\nEngineering\nP1–P2, bugs, outages, data issues\nVP Eng for Sev1\nTier 4\nLeadership\nMajor incidents, legal, press\nCTO / CEO\n 4. Incident Severity Classification\nSev 1\nFull service outage OR data breach — all hands, war room\nSev 2\nPartial outage affecting >10% of users — immediate engineering response\nSev 3\nDegraded performance, single tenant affected — engineering ticket same day\nSev 4\nMinor bug, n",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Support Team\nResolution Confirmation:\nSubject: Resolved — [Brief Description] — Ticket #[ID] Hi [Customer Name], We've\nresolved the issue affecting [describe impact]. Root cause: [brief RCA]. Prevention\nmeasures: [what we're doing to prevent recurrence]. A detailed post-mortem will\nfollow within [X] business days.\n6. Resolution Workflow\nStep 1: Ticket created in Zendesk --> auto-assigned to Tier 1 queue Step 2: Triage\nwithin SLA first-response time --> priority assigned Step 3: If P1/P2 --> imme",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Subcontractor Approval\nVendor must notify TechCorp before engaging subprocessors\nGoverning Law\nContracts governed by laws of the State of California\n6. Vendor Onboarding\n Step 1: Vendor Request Ticket approved in Jira Step 2: Security questionnaire sent\nand reviewed (SLA: 5 business days) Step 3: Legal redlines exchanged and MSA/DPA\nfinalized Step 4: Finance creates PO; vendor added to approved payment system Step 5:\nIT provisions SSO/SCIM integration (mandatory for T1/T2 SaaS) Step 6: Vendor co",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "TechCorp Quarterly Engineering\nRoadmap\n2026 Engineering Goals, Features & Hiring Plan\nVersion: v1.0\nDocument: TC-ROAD-010\nTechCorp Internal\n1. Q1 Goals (Jan–Mar 2026)\nInitiative\nOwner\nStatus\nPriority\nRAG v2 launch (hybrid search)\nAI Team\nCompleted\nP1\nMulti-tenant RBAC overhaul\nPlatform\nCompleted\nP1\nQdrant migration from Pinecone\nInfra\nCompleted\nP2\nPython SDK v3.0 release\nDX Team\nCompleted\nP2\nSOC 2 Type II readiness\nSecurity\nIn Progress\nP1\nGrafana observability rollout\nSRE\nCompleted\nP2\n2. Q2 Goal",
+            "source": "10_TechCorp_Quarterly_Engineering_Roadmap.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "According to the context, the first response SLA for a P1 priority ticket is **15 minutes** (Source: 07_TechCorp_Customer_Escalation_Process.pdf).",
+        "retrieval_ms": 22.8,
+        "generation_ms": 1819.7
+      }
+    },
+    {
+      "query": "Which tier handles P3 to P5 tickets and escalates P1-P2 to Tier 2?",
+      "source_pdf": "07_TechCorp_Customer_Escalation_Process.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "P5 – Enhancement\nFeature request or feedback; no service impact\n2. SLA Levels\nPriority\nFirst Response\nUpdate Cadence\nResolution Target\nBusiness Hours\nP1\n15 minutes\nEvery 30 min\n4 hours\n24/7\nP2\n1 hour\nEvery 2 hours\n8 hours\n24/7\nP3\n4 hours\nDaily\n3 business days\nBusiness hours\nP4\n8 hours\nWeekly\n10 business days\nBusiness hours\nP5\n2 business days\nAs needed\nNext quarter\nBusiness hours\n3. Escalation Matrix\nTier\nTeam\nHandles\nEscalates To\nTier 1\nSupport Agents\nP3–P5, FAQ, account, billing",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.9916
+          },
+          {
+            "text": "Support Agents\nP3–P5, FAQ, account, billing\nTier 2 for P1–P2\nTier 2\nTechnical Support\nP2–P3, API issues, integrations\nTier 3 for unresolved\nTier 3\nEngineering\nP1–P2, bugs, outages, data issues\nVP Eng for Sev1\nTier 4\nLeadership\nMajor incidents, legal, press\nCTO / CEO\n 4. Incident Severity Classification\nSev 1\nFull service outage OR data breach — all hands, war room\nSev 2\nPartial outage affecting >10% of users — immediate engineering response\nSev 3",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.9778
+          },
+          {
+            "text": "6. Resolution Workflow\nStep 1: Ticket created in Zendesk --> auto-assigned to Tier 1 queue Step 2: Triage\nwithin SLA first-response time --> priority assigned Step 3: If P1/P2 --> immediate\nescalation to Tier 2, Slack alert in #escalations Step 4: Engineering creates JIRA\nticket linked to Zendesk case Step 5: Fix deployed --> customer notified with\nresolution note Step 6: CSAT survey sent 24h after ticket closure Step 7: P1/P2\nincidents require 5-day post-mortem in Notion",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.9777
+          },
+          {
+            "text": "TechCorp Customer Escalation\nProcess\nTicket Prioritization, SLA & Resolution Workflow\nVersion: v1.9\nDocument: TC-ESC-007\nTechCorp Internal\n1. Ticket Priority Levels\nP1 – Critical\nProduction outage affecting multiple customers or data loss risk\nP2 – High\nCore feature broken; significant customer impact; no workaround\nP3 – Medium\nPartial functionality degraded; workaround exists\nP4 – Low\nMinor issue or cosmetic bug; business not impacted\nP5 – Enhancement",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.9056
+          },
+          {
+            "text": "escalation level list when necessary. \nESCALATION LEVELS\nLevel 1 \nSupport Center Specialists \ncisupport@cobaltiron.com\nLevel 2 \nOperations Manager \n(888) 584-4766\nLevel 3 \nVice President, Operations \n(913) 707-0233\nLevel 4 \nChief Financial Officer \n(720) 635-5276\nTicket Escalation Process",
+            "source": "customer-support-manual.pdf",
+            "score": 0.1202
+          }
+        ],
+        "answer": "Based on the context, Tier 1 (Support Agents) handles P3–P5 tickets and escalates P1–P2 to Tier 2.\n\nSource: [07_TechCorp_Customer_Escalation_Process.pdf]",
+        "retrieval_ms": 391.7,
+        "generation_ms": 1552.3
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "TechCorp Customer Escalation\nProcess\nTicket Prioritization, SLA & Resolution Workflow\nVersion: v1.9\nDocument: TC-ESC-007\nTechCorp Internal\n1. Ticket Priority Levels\nP1 – Critical\nProduction outage affecting multiple customers or data loss risk\nP2 – High\nCore feature broken; significant customer impact; no workaround\nP3 – Medium\nPartial functionality degraded; workaround exists\nP4 – Low\nMinor issue or cosmetic bug; business not impacted\nP5 – Enhancement\nFeature request or feedback; no service imp",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Tier 2 for P1–P2\nTier 2\nTechnical Support\nP2–P3, API issues, integrations\nTier 3 for unresolved\nTier 3\nEngineering\nP1–P2, bugs, outages, data issues\nVP Eng for Sev1\nTier 4\nLeadership\nMajor incidents, legal, press\nCTO / CEO\n 4. Incident Severity Classification\nSev 1\nFull service outage OR data breach — all hands, war room\nSev 2\nPartial outage affecting >10% of users — immediate engineering response\nSev 3\nDegraded performance, single tenant affected — engineering ticket same day\nSev 4\nMinor bug, n",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Support Team\nResolution Confirmation:\nSubject: Resolved — [Brief Description] — Ticket #[ID] Hi [Customer Name], We've\nresolved the issue affecting [describe impact]. Root cause: [brief RCA]. Prevention\nmeasures: [what we're doing to prevent recurrence]. A detailed post-mortem will\nfollow within [X] business days.\n6. Resolution Workflow\nStep 1: Ticket created in Zendesk --> auto-assigned to Tier 1 queue Step 2: Triage\nwithin SLA first-response time --> priority assigned Step 3: If P1/P2 --> imme",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "TechCorp Quarterly Engineering\nRoadmap\n2026 Engineering Goals, Features & Hiring Plan\nVersion: v1.0\nDocument: TC-ROAD-010\nTechCorp Internal\n1. Q1 Goals (Jan–Mar 2026)\nInitiative\nOwner\nStatus\nPriority\nRAG v2 launch (hybrid search)\nAI Team\nCompleted\nP1\nMulti-tenant RBAC overhaul\nPlatform\nCompleted\nP1\nQdrant migration from Pinecone\nInfra\nCompleted\nP2\nPython SDK v3.0 release\nDX Team\nCompleted\nP2\nSOC 2 Type II readiness\nSecurity\nIn Progress\nP1\nGrafana observability rollout\nSRE\nCompleted\nP2\n2. Q2 Goal",
+            "source": "10_TechCorp_Quarterly_Engineering_Roadmap.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Multi-model routing engine\nAI Team\nPlanned\nP1\nAnalytics Engine GA release\nData Eng\nPlanned\nP1\n Brazil region (sa-east-1)\nInfra\nPlanned\nP2\nFine-tuning pipeline (internal)\nAI Team\nPlanned\nP2\nMobile SDK (iOS + Android)\nDX Team\nPlanned\nP3\nAutomated red-teaming framework\nSecurity\nPlanned\nP2\n4. Q4 Goals (Oct–Dec 2026)\nInitiative\nOwner\nStatus\nPriority\nGovCloud FedRAMP Moderate ATO\nSecurity\nPlanned\nP1\nReal-time collaboration features\nProduct\nPlanned\nP2\nVector DB auto-scaling (Qdrant)\nInfra\nPlanned\nP2\nIS",
+            "source": "10_TechCorp_Quarterly_Engineering_Roadmap.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, Tier 1 (Support Agents) handles P3–P5 tickets and escalates P1–P2 to Tier 2. (Source: 07_TechCorp_Customer_Escalation_Process.pdf)",
+        "retrieval_ms": 21.6,
+        "generation_ms": 1752.6
+      }
+    },
+    {
+      "query": "What must be created within 5 days after a P1 or P2 incident is closed?",
+      "source_pdf": "07_TechCorp_Customer_Escalation_Process.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "6. Resolution Workflow\nStep 1: Ticket created in Zendesk --> auto-assigned to Tier 1 queue Step 2: Triage\nwithin SLA first-response time --> priority assigned Step 3: If P1/P2 --> immediate\nescalation to Tier 2, Slack alert in #escalations Step 4: Engineering creates JIRA\nticket linked to Zendesk case Step 5: Fix deployed --> customer notified with\nresolution note Step 6: CSAT survey sent 24h after ticket closure Step 7: P1/P2\nincidents require 5-day post-mortem in Notion",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.989
+          },
+          {
+            "text": "7. SLA Monitoring & Breach Remediation\n• T1 vendors: uptime and incident response tracked in real time via status page integrations\n• Monthly SLA report auto-generated for all T1/T2 vendors and shared with vendor owners\n• Any SLA breach must be formally documented within 48 hours of discovery\n• Service credits claimed within 30 days of breach; tracked in Vendor Registry\nEscalation thresholds:\n1st Breach\nFormal written notice; vendor must provide RCA within 5 business days\n2nd Breach",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.7748
+          },
+          {
+            "text": "4 hours (P1)\nResolution Target\n4 hours (P1)\n8 hours (P1)\n2 business days\nStatus Page\nRequired (public)\nRequired\nRecommended\nSupport Hours\n24/7\nBusiness hours + on-call\nBusiness hours\nData Breach Notice\nWithin 24 hours\nWithin 48 hours\nWithin 72 hours\nAudit Rights\nAnnual + on request\nAnnual\nOn request only\n5. Contract Requirements\nAll vendor contracts must include the following clauses:\nMaster Services Agreement (MSA)Governs the overall relationship; must be signed before any SOW",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.1466
+          },
+          {
+            "text": "incidents require 5-day post-mortem in Notion\n© 2026 TechCorp Inc. — Confidential & Proprietary",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.0947
+          },
+          {
+            "text": "Sev 3\nDegraded performance, single tenant affected — engineering ticket same day\nSev 4\nMinor bug, no data loss — standard sprint process\n5. Communication Templates\nInitial P1 Response (within 15 min):\nSubject: [URGENT] We're investigating your reported issue — Ticket #[ID] Hi [Customer\nName], Thank you for reaching out. We've received your report and our engineering\nteam is actively investigating. We'll provide a status update within 30 minutes.",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 0.0084
+          }
+        ],
+        "answer": "Based on the context, a 5-day post-mortem in Notion must be created after a P1 or P2 incident is closed.\n\nSource: 07_TechCorp_Customer_Escalation_Process.pdf",
+        "retrieval_ms": 139.6,
+        "generation_ms": 1703.8
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "• Approved vendors added to the TechCorp Vendor Registry within 5 business days\n4. SLA Requirements by Tier\nThe following minimum SLA requirements must be contractually guaranteed by vendors in each tier.\nFailure to meet these thresholds triggers the remediation process in Section 7.\nMetric\nTier 1 (Critical)\nTier 2 (Important)\nTier 3 (Standard)\nUptime Guarantee\n99.99% / month\n99.9% / month\n99.5% / month\nPlanned Maintenance\n72h advance notice\n48h advance notice\n24h advance notice\nIncident Respons",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Support Team\nResolution Confirmation:\nSubject: Resolved — [Brief Description] — Ticket #[ID] Hi [Customer Name], We've\nresolved the issue affecting [describe impact]. Root cause: [brief RCA]. Prevention\nmeasures: [what we're doing to prevent recurrence]. A detailed post-mortem will\nfollow within [X] business days.\n6. Resolution Workflow\nStep 1: Ticket created in Zendesk --> auto-assigned to Tier 1 queue Step 2: Triage\nwithin SLA first-response time --> priority assigned Step 3: If P1/P2 --> imme",
+            "source": "07_TechCorp_Customer_Escalation_Process.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "· Evacuate only after shaking stops or when instructed by emergency personnel.\n  · Watch for hazards like falling debris, gas leaks, or downed power lines.\n#### For Hazardous Material Spill\n  · Evacuate the immediate area and close doors to contain the spill.\n  · Do not attempt to clean up unless trained and equipped.\n  · Notify TechCorp Security and the facilities team immediately.\n  · Follow decontamination procedures if exposed (e.g., remove contaminated clothing, wash skin with water\n4. Acco",
+            "source": "emergency-response-process-handling-danger-in-a-techcorp-office.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Read\n3. MFA Requirements\n• MFA is mandatory for ALL production access — no exceptions\n• Approved MFA methods: hardware security key (FIDO2/WebAuthn) preferred; TOTP acceptable\n• SMS OTP is forbidden — phishing risk is too high\n• MFA must be re-authenticated for: new sessions, actions above current access level, AWS Console\n• Lost MFA device: submit ticket to IT Security; access suspended until device verified\n• Service accounts use AWS IAM roles with short-lived STS tokens — no static MFA bypass",
+            "source": "08_TechCorp_Production_Access_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Step 1: Notice of termination issued per contract terms (30–90 days) Step 2: Data\nexport requested from vendor within 5 business days of notice Step 3: Data deletion\nconfirmed in writing from vendor within 30 days of contract end Step 4: IT revokes\nSSO access, deactivates API keys, and removes integrations Step 5: Finance cancels PO\nand ensures final invoice settlement Step 6: Vendor marked as 'Offboarded' in Vendor\nRegistry; record retained 7 years Step 7: Lessons learned documented if vendor w",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, a **5-day post-mortem** must be created in Notion for P1/P2 incidents after the ticket is closed.\n\nSource: [07_TechCorp_Customer_Escalation_Process.pdf]",
+        "retrieval_ms": 26.4,
+        "generation_ms": 1271.6
+      }
+    },
+    {
+      "query": "What should I do if my leave is not showing in the system after approval?",
+      "source_pdf": "gap_bf21779a.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "[gap_bf21779a.pdf]\nAnnual Leave Procedures: Outcomes and Key Information\nOverview\nAnnual leave procedures at TechCorp are designed to ensure fair, consistent, and compliant management o\nKey Points\n  · Leave Request Approval or Denial: The primary outcome is a decision on your leave request, based on te\n  · Payroll and Benefits Adjustments: Approved leave triggers automatic updates to payroll (e.g., paid time of\n  · Record Keeping: All leave activity is logged in the HR system for transparency, c",
+            "source": "gap_bf21779a.pdf",
+            "score": 0.0835
+          },
+          {
+            "text": "case should first contact his or her immediate supervisor.  If the supervisor agrees that an exception \nis appropriate, the approval of the General Counsel must be obtained after consultation with the \nappropriate Executive Team member.  A list of the current members of the Executive Team is \navailable on Lantheus Central. \nAny waiver of the Code for directors or executive officers may be made only by the Board of",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.0013
+          },
+          {
+            "text": "attendance, some practices can be waived and some documents may be removed or partially \nproduced. Work during the sprints follows the usual agile approach, although the outcome is subject \nto approval during the reviews, it is unlikely to be rejected. Additional requirements and changes can \nbe added to the system at any time. The level of formalisation is reduced but flexibility is high.  \nDifference to previous model",
+            "source": "Engineering-handbook.pdf",
+            "score": 0.0011
+          },
+          {
+            "text": "2. TRANSPORTATION \n \nAIR TRAVEL \nAuthorization \nAll air travel requires approval prior to booking by the ENA liaison staff with oversight of the applicable budget.  \n \nENA Staff: Please note that authorization forms for air travel are no longer required. If your immediate supervisor/budget \nowner approves of the air travel you are free to book within SAP Concur. It is the traveler’s/designee’s responsibility to",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0009
+          },
+          {
+            "text": "an ENA master account. The amount requested must be clearly indicated in the request. \n \n• \nTravelers with an approved advance must complete the Expense Reimbursement Request Form no later \nthan 30 days following the completion of travel and must return to ENA any advanced funds that exceed \nthe total reimbursable expenses at that time. Any excess funds not returned will be immediately included",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0007
+          }
+        ],
+        "answer": "The context does not provide information on what to do if leave is not showing in the system after approval.",
+        "retrieval_ms": 400.9,
+        "generation_ms": 1235.7
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Policy-Specific Outcomes\n  · Carryover: Unused annual leave may be carried over to the next year (up to 5 days) or forfeited if not use\n  · Cash-out: In some regions, unused leave may be paid out upon termination or at year-end (check local po\n  · Accrual: Leave balances are updated monthly based on your employment contract and tenure.\nTroubleshooting Common Issues\n  · Leave not showing in system: Contact HR within 48 hours of approval.\n  · Payroll discrepancy: Submit a ticket via the HR portal ",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "· [Leave Balances and Accrual FAQ](https://techcorp-hr.internal/faq/leave-balances)\n  · [Manager·s Guide to Leave Approvals](https://techcorp-hr.internal/guides/manager-leave-approvals)\n  · [Contact HR Support](mailto:hrsupport@techcorp.com)\nActionable Takeaways\n  · Plan ahead: Submit leave requests at least 2 weeks in advance (4 weeks for peak periods) to maximize a\n  · Check balances: Verify your annual leave balance in the HR portal before submitting a request.\n  · Communicate with your team:",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "3. HR Processing: If approved, HR updates the system to reflect leave balances, payroll deductions, and co\n4. Notification: You receive an email confirmation with leave dates, balance remaining, and any special instr\n5. Post-Leave Reconciliation: Upon return, HR verifies actual leave taken vs. approved, and adjusts records\nCommon Outcomes and Their Implications\n| Outcome | What It Means | Action Required |\n|---------|---------------|-----------------|\n| Approved | Leave is granted as requested. ",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Annual Leave Procedures: Outcomes and Key Information\nOverview\nAnnual leave procedures at TechCorp are designed to ensure fair, consistent, and compliant management o\nKey Points\n  · Leave Request Approval or Denial: The primary outcome is a decision on your leave request, based on te\n  · Payroll and Benefits Adjustments: Approved leave triggers automatic updates to payroll (e.g., paid time of\n  · Record Keeping: All leave activity is logged in the HR system for transparency, compliance, and futu",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Login Events\nOkta audit log — all SSO events, 12 months\n7. Audit Rules\n• Quarterly access review: all production access rights reviewed and recertified by managers\n• Automated daily check: service accounts and IAM roles not used in 90 days flagged for removal\n• Any access used outside of business hours triggers automated Slack alert to Security\n• Privileged access (L3+) actions generate weekly summary report emailed to Security team\n• Annual third-party audit of access control effectiveness requ",
+            "source": "08_TechCorp_Production_Access_Policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "According to the context, if your leave is not showing in the system after approval, you should contact HR within 48 hours of approval. (Source: gap_bf21779a.pdf)",
+        "retrieval_ms": 26.3,
+        "generation_ms": 1409.1
+      }
+    },
+    {
+      "query": "How many unused annual leave days can be carried over to the next year?",
+      "source_pdf": "gap_bf21779a.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "[gap_bf21779a.pdf]\nAnnual Leave Procedures: Outcomes and Key Information\nOverview\nAnnual leave procedures at TechCorp are designed to ensure fair, consistent, and compliant management o\nKey Points\n  · Leave Request Approval or Denial: The primary outcome is a decision on your leave request, based on te\n  · Payroll and Benefits Adjustments: Approved leave triggers automatic updates to payroll (e.g., paid time of\n  · Record Keeping: All leave activity is logged in the HR system for transparency, c",
+            "source": "gap_bf21779a.pdf",
+            "score": 0.3821
+          },
+          {
+            "text": "Annual Renewal Review\nAnnual\nProcurement + Legal + Finance\nRenew / renegotiate / exit\nAd-hoc Incident Review\nPer event\nSRE + Security + vendor eng\nPost-mortem document\n10. Vendor Offboarding\nStep 1: Notice of termination issued per contract terms (30–90 days) Step 2: Data\nexport requested from vendor within 5 business days of notice Step 3: Data deletion\nconfirmed in writing from vendor within 30 days of contract end Step 4: IT revokes",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.0002
+          },
+          {
+            "text": "Trip Cancellation/Unused Tickets \nTravelers unable to travel due to illness, emergency, or other conflict should notify the staff coordinating \nthe meeting or travel purpose and the Director, Meetings and Events and as soon as they are aware of the \nsituation, to allow travel reservations to be canceled with minimum penalty. Unused airline tickets with \nremaining value are the property of ENA to be used for future ENA business travel. \n \nCombined Trips",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0001
+          },
+          {
+            "text": "Corporate credit card expenditures are to be reconciled and submitted with original receipts to Accounts Payable \nwithin 5 business days of the statement date (usually the 24th of the month) via SAP Concur Expense. Expense \napprovers will have 5 business days to approve all submitted expense requests for submission to Accounts Payable \nfor processing.  \nFailure to comply with any of the corporate card requirements will result in card deactivation or permanent",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 0.0001
+          },
+          {
+            "text": "Day 0\nAll active sessions terminated; MFA devices de-registered\nDay 1\nAWS IAM users, K8s service accounts, and DB users deleted\nDay 7\nConfirmation audit: zero active credentials for the departed employee\nData Retention\nEmployee data retained per HR policy; code contributions remain\nContractor Offboarding\nSame Day 0 process; access provisioned on shorter 24h notice\n© 2026 TechCorp Inc. — Confidential & Proprietary",
+            "source": "08_TechCorp_Production_Access_Policy.pdf",
+            "score": 0.0
+          }
+        ],
+        "answer": "Based on the provided context, up to 5 days of unused annual leave may be carried over to the next year.\n\nSource: [gap_bf21779a.pdf]",
+        "retrieval_ms": 372.2,
+        "generation_ms": 1370.3
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Policy-Specific Outcomes\n  · Carryover: Unused annual leave may be carried over to the next year (up to 5 days) or forfeited if not use\n  · Cash-out: In some regions, unused leave may be paid out upon termination or at year-end (check local po\n  · Accrual: Leave balances are updated monthly based on your employment contract and tenure.\nTroubleshooting Common Issues\n  · Leave not showing in system: Contact HR within 48 hours of approval.\n  · Payroll discrepancy: Submit a ticket via the HR portal ",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "· [Leave Balances and Accrual FAQ](https://techcorp-hr.internal/faq/leave-balances)\n  · [Manager·s Guide to Leave Approvals](https://techcorp-hr.internal/guides/manager-leave-approvals)\n  · [Contact HR Support](mailto:hrsupport@techcorp.com)\nActionable Takeaways\n  · Plan ahead: Submit leave requests at least 2 weeks in advance (4 weeks for peak periods) to maximize a\n  · Check balances: Verify your annual leave balance in the HR portal before submitting a request.\n  · Communicate with your team:",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "3. HR Processing: If approved, HR updates the system to reflect leave balances, payroll deductions, and co\n4. Notification: You receive an email confirmation with leave dates, balance remaining, and any special instr\n5. Post-Leave Reconciliation: Upon return, HR verifies actual leave taken vs. approved, and adjusts records\nCommon Outcomes and Their Implications\n| Outcome | What It Means | Action Required |\n|---------|---------------|-----------------|\n| Approved | Leave is granted as requested. ",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "international travel on ENA business are reimbursable expenses.  \n \nTrusted Traveler Programs \nTrusted Traveler Program (Global Entry, TSA Pre-check, or Clear Pre-check) enrollment fees are reimbursable \nfor travelers expected to take more than 5 trips in a year for ENA business, based on the requirements of their \njob or volunteer position requirements. ENA will reimburse the fee for one program per qualifying traveler up \nto $100 in a five-year period.  \n \nSpouse/Partner Travel  \nTravel costs ",
+            "source": "travel-and-expenses-policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "abandoned due to unforeseen circumstances, such as new priorities. \nIt is advisable to start by defining the duration of the next sprint and then set dates for the next \nplanning and review meetings. The sprint typically lasts between 2 and 4 weeks, although less than \nfour weeks can often be inefficient if a full set of documentation needs to be updated as part of the \nsprint. In some specific circumstances it is possible (although typically not advisable) to do a shorter \nor larger sprint. Sho",
+            "source": "Engineering-handbook.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context provided, unused annual leave may be carried over to the next year up to 5 days.\n\nSource: gap_bf21779a.pdf",
+        "retrieval_ms": 24.5,
+        "generation_ms": 1297.2
+      }
+    },
+    {
+      "query": "What is the primary outcome of the annual leave procedures?",
+      "source_pdf": "gap_bf21779a.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "[gap_bf21779a.pdf]\nAnnual Leave Procedures: Outcomes and Key Information\nOverview\nAnnual leave procedures at TechCorp are designed to ensure fair, consistent, and compliant management o\nKey Points\n  · Leave Request Approval or Denial: The primary outcome is a decision on your leave request, based on te\n  · Payroll and Benefits Adjustments: Approved leave triggers automatic updates to payroll (e.g., paid time of\n  · Record Keeping: All leave activity is logged in the HR system for transparency, c",
+            "source": "gap_bf21779a.pdf",
+            "score": 0.9991
+          },
+          {
+            "text": "Annual Renewal Review\nAnnual\nProcurement + Legal + Finance\nRenew / renegotiate / exit\nAd-hoc Incident Review\nPer event\nSRE + Security + vendor eng\nPost-mortem document\n10. Vendor Offboarding\nStep 1: Notice of termination issued per contract terms (30–90 days) Step 2: Data\nexport requested from vendor within 5 business days of notice Step 3: Data deletion\nconfirmed in writing from vendor within 30 days of contract end Step 4: IT revokes",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.0001
+          },
+          {
+            "text": "Data Processing Agreement (DPA)Required for any vendor processing personal data (GDPR Article 28)\nSLA Schedule\nExplicit uptime, response, and resolution commitments with remedies\nService Credits\nCredits owed for SLA breaches: typically 10–30% of monthly fee\nTermination for Cause\nRight to terminate within 30 days if SLA breach is uncured\nTermination for Convenience\nRight to exit with 90-day notice for T1; 30 days for T2/T3\nIP & Data Ownership",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.0
+          },
+          {
+            "text": "Priority Levels\nPRIORITY LEVEL\nDESCRIPTION\nURGENT\nService Outage\nServices unavailable \nor Disaster Declaration \nmade (data restoration \nassistance required)\nConcerns a major issue that inhibits a primary business \nfunction from operating as required. \nRequires rapid attention from the Cobalt Iron Support team.  \nIn this instance, a “primary business function” is taken to \nmean a file and system restore and recovery functions.  This \nalso includes Compass and \u0002ccelerator service outages or",
+            "source": "customer-support-manual.pdf",
+            "score": 0.0
+          },
+          {
+            "text": "attendance, some practices can be waived and some documents may be removed or partially \nproduced. Work during the sprints follows the usual agile approach, although the outcome is subject \nto approval during the reviews, it is unlikely to be rejected. Additional requirements and changes can \nbe added to the system at any time. The level of formalisation is reduced but flexibility is high.  \nDifference to previous model",
+            "source": "Engineering-handbook.pdf",
+            "score": 0.0
+          }
+        ],
+        "answer": "Based solely on the provided context, the primary outcome of the annual leave procedures is \"a decision on your leave request, based on team schedules and business priorities\" (gap_bf21779a.pdf).",
+        "retrieval_ms": 381.4,
+        "generation_ms": 1362.0
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Annual Leave Procedures: Outcomes and Key Information\nOverview\nAnnual leave procedures at TechCorp are designed to ensure fair, consistent, and compliant management o\nKey Points\n  · Leave Request Approval or Denial: The primary outcome is a decision on your leave request, based on te\n  · Payroll and Benefits Adjustments: Approved leave triggers automatic updates to payroll (e.g., paid time of\n  · Record Keeping: All leave activity is logged in the HR system for transparency, compliance, and futu",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Policy-Specific Outcomes\n  · Carryover: Unused annual leave may be carried over to the next year (up to 5 days) or forfeited if not use\n  · Cash-out: In some regions, unused leave may be paid out upon termination or at year-end (check local po\n  · Accrual: Leave balances are updated monthly based on your employment contract and tenure.\nTroubleshooting Common Issues\n  · Leave not showing in system: Contact HR within 48 hours of approval.\n  · Payroll discrepancy: Submit a ticket via the HR portal ",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "3. HR Processing: If approved, HR updates the system to reflect leave balances, payroll deductions, and co\n4. Notification: You receive an email confirmation with leave dates, balance remaining, and any special instr\n5. Post-Leave Reconciliation: Upon return, HR verifies actual leave taken vs. approved, and adjusts records\nCommon Outcomes and Their Implications\n| Outcome | What It Means | Action Required |\n|---------|---------------|-----------------|\n| Approved | Leave is granted as requested. ",
+            "source": "gap_bf21779a.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "personal reasons.  \nIt is critical that employees understand all of the requirements detailed in the Company’s information \ntechnology and device policies, which are available on Lantheus Central. \nProfessionalism and Personal Conduct \nIt is expected of all personnel that the quality of work and the atmosphere in which it is done be \nconsistent with the reputation of Lantheus as a leading organization.  An employee’s or other \npersonnel’s conduct when working for or representing Lantheus should ",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Compass !or IBM Power VS Support \tan\u001fboo& | 9 \n 10 | COBALT IRON\nIn order for the Support team to understand the severity of the incident \nexperienced, relevant information must be provided at the time the ticket \nis submitted via email or by logging in to the Support Portal.\nTECHNICAL SUPPORT GOALS\nOur goal is to provide triage and resolution steps that meet the needs \nof customer business.  The table above identifies our internal goals, \nwhich are monitored and measured on a regular basis.\nPri",
+            "source": "customer-support-manual.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, the primary outcome of the annual leave procedures is a decision on your leave request, based on team schedules and business priorities. (Source: gap_bf21779a.pdf)",
+        "retrieval_ms": 23.7,
+        "generation_ms": 1212.7
+      }
+    },
+    {
+      "query": "What is the minimum uptime guarantee required for Tier 1 (Critical) vendors?",
+      "source_pdf": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "4. SLA Requirements by Tier\nThe following minimum SLA requirements must be contractually guaranteed by vendors in each tier.\nFailure to meet these thresholds triggers the remediation process in Section 7.\nMetric\nTier 1 (Critical)\nTier 2 (Important)\nTier 3 (Standard)\nUptime Guarantee\n99.99% / month\n99.9% / month\n99.5% / month\nPlanned Maintenance\n72h advance notice\n48h advance notice\n24h advance notice\nIncident Response\n15 min (P1)\n1 hour (P1)\n4 hours (P1)\nResolution Target\n4 hours (P1)",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.9994
+          },
+          {
+            "text": "critical vendors must meet.\nApplies To\nAll TechCorp departments procuring external services or software\nPolicy Owner\nVP of Engineering & Head of Procurement\nReview Cycle\nAnnual — or immediately following a major vendor incident\nEffective\nJanuary 1, 2026\nVersion\nv1.0\n2. Vendor Classification\nAll vendors are classified into tiers based on their criticality to TechCorp's operations and the sensitivity of\ndata they access.\nTier\nLabel\nCriteria\nExamples\nT1\nCritical",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.3307
+          },
+          {
+            "text": "• Minimum 3 vendors evaluated for any T1/T2 procurement above $10,000/year\n• Security questionnaire (based on CAIQ/SIG Lite) required for T1/T2 vendors\n• Legal review of MSA and DPA required before any contract is signed\n • Finance approval required for any commitment exceeding $25,000 annually\n• Final approval matrix: T1 requires VP Eng + CFO sign-off; T2 requires department head\n• Approved vendors added to the TechCorp Vendor Registry within 5 business days\n4. SLA Requirements by Tier",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.2889
+          },
+          {
+            "text": "Data Processing Agreement (DPA)Required for any vendor processing personal data (GDPR Article 28)\nSLA Schedule\nExplicit uptime, response, and resolution commitments with remedies\nService Credits\nCredits owed for SLA breaches: typically 10–30% of monthly fee\nTermination for Cause\nRight to terminate within 30 days if SLA breach is uncured\nTermination for Convenience\nRight to exit with 90-day notice for T1; 30 days for T2/T3\nIP & Data Ownership",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.0178
+          },
+          {
+            "text": "Tier\nLabel\nCriteria\nExamples\nT1\nCritical\nProduction dependency; handles customer PII or financial data\nAWS, Anthropic, Stripe, PagerDuty\nT2\nImportant\nSignificant workflow dependency; no customer data\nGitHub, Notion, Jira, Slack\nT3\nStandard\nNon-critical tooling; limited data exposure\nFigma, Loom, Calendly\nT4\nLow-risk\nOne-off or trial services; no data sharing\nConference SaaS, survey tools\n3. Vendor Selection Process\n• Business need documented in a Vendor Request Ticket (Jira template: VND-REQ)",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.017
+          }
+        ],
+        "answer": "Based on the context, the minimum uptime guarantee required for Tier 1 (Critical) vendors is **99.99% per month**.\n\nSource: TechCorp_Vendor_Management_SLA_Policy.pdf",
+        "retrieval_ms": 159.0,
+        "generation_ms": 1373.8
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "• Approved vendors added to the TechCorp Vendor Registry within 5 business days\n4. SLA Requirements by Tier\nThe following minimum SLA requirements must be contractually guaranteed by vendors in each tier.\nFailure to meet these thresholds triggers the remediation process in Section 7.\nMetric\nTier 1 (Critical)\nTier 2 (Important)\nTier 3 (Standard)\nUptime Guarantee\n99.99% / month\n99.9% / month\n99.5% / month\nPlanned Maintenance\n72h advance notice\n48h advance notice\n24h advance notice\nIncident Respons",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "data they access.\nTier\nLabel\nCriteria\nExamples\nT1\nCritical\nProduction dependency; handles customer PII or financial data\nAWS, Anthropic, Stripe, PagerDuty\nT2\nImportant\nSignificant workflow dependency; no customer data\nGitHub, Notion, Jira, Slack\nT3\nStandard\nNon-critical tooling; limited data exposure\nFigma, Loom, Calendly\nT4\nLow-risk\nOne-off or trial services; no data sharing\nConference SaaS, survey tools\n3. Vendor Selection Process\n• Business need documented in a Vendor Request Ticket (Jira tem",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Yes\nYes\nYes\nEncryption in Transit (TLS 1.3)\nYes\nYes\nYes\nMFA for Admin Access\nYes\nYes\nRecommended\nVulnerability Disclosure Policy\nYes\nYes\nNo\nGDPR / CCPA Compliance\nYes\nIf applicable\nIf applicable\nZero-Retention Option\nRequired\nPreferred\nNo\n9. Vendor Performance Reviews\nVendor performance is reviewed on a structured cadence to ensure continued alignment with TechCorp's\noperational and quality standards.\n Review Type\nFrequency\nParticipants\nOutput\nT1 Operational Review\nMonthly\nVendor owner + SRE lea",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "{       \n\"igroup\": {         \n\"uuid\": \"d19ec2fa-fec7-11e8-b23d-00a098e32c28\",         \n\"key\": \"e4f33f90-f75f-11e8-9ed9-00a098e3215f:type=igroup,uuid=d19ec2fa-fec7-11e8-b23d-00a098e32c28\",    \n\"name\": \"lun55_igroup\",         \n\"_links\": {           \n\"self\": {             \n\"href\": \"/api/datacenter/protocols/san/igroups/e4f33f90-f75f-11e8-9ed9-00a098e3215f:type=igroup, \nuuid=d19ec2fa-fec7-11e8-b23d-00a098e32c28\"           \n}         \n}       \n},       \n\"logical_unit_number\": 3     \n}   \n],   \n\"assig",
+            "source": "API DOCUMENTATION.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "On request only\n5. Contract Requirements\nAll vendor contracts must include the following clauses:\nMaster Services Agreement (MSA)Governs the overall relationship; must be signed before any SOW\nData Processing Agreement (DPA)Required for any vendor processing personal data (GDPR Article 28)\nSLA Schedule\nExplicit uptime, response, and resolution commitments with remedies\nService Credits\nCredits owed for SLA breaches: typically 10–30% of monthly fee\nTermination for Cause\nRight to terminate within 3",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, the minimum uptime guarantee required for Tier 1 (Critical) vendors is **99.99% per month**.\n\nSource: TechCorp_Vendor_Management_SLA_Policy.pdf",
+        "retrieval_ms": 23.2,
+        "generation_ms": 1719.6
+      }
+    },
+    {
+      "query": "Who must sign off on the procurement of a Tier 1 vendor?",
+      "source_pdf": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "• Minimum 3 vendors evaluated for any T1/T2 procurement above $10,000/year\n• Security questionnaire (based on CAIQ/SIG Lite) required for T1/T2 vendors\n• Legal review of MSA and DPA required before any contract is signed\n • Finance approval required for any commitment exceeding $25,000 annually\n• Final approval matrix: T1 requires VP Eng + CFO sign-off; T2 requires department head\n• Approved vendors added to the TechCorp Vendor Registry within 5 business days\n4. SLA Requirements by Tier",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.9417
+          },
+          {
+            "text": "critical vendors must meet.\nApplies To\nAll TechCorp departments procuring external services or software\nPolicy Owner\nVP of Engineering & Head of Procurement\nReview Cycle\nAnnual — or immediately following a major vendor incident\nEffective\nJanuary 1, 2026\nVersion\nv1.0\n2. Vendor Classification\nAll vendors are classified into tiers based on their criticality to TechCorp's operations and the sensitivity of\ndata they access.\nTier\nLabel\nCriteria\nExamples\nT1\nCritical",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.4517
+          },
+          {
+            "text": "4. SLA Requirements by Tier\nThe following minimum SLA requirements must be contractually guaranteed by vendors in each tier.\nFailure to meet these thresholds triggers the remediation process in Section 7.\nMetric\nTier 1 (Critical)\nTier 2 (Important)\nTier 3 (Standard)\nUptime Guarantee\n99.99% / month\n99.9% / month\n99.5% / month\nPlanned Maintenance\n72h advance notice\n48h advance notice\n24h advance notice\nIncident Response\n15 min (P1)\n1 hour (P1)\n4 hours (P1)\nResolution Target\n4 hours (P1)",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.0813
+          },
+          {
+            "text": "Annual Renewal Review\nAnnual\nProcurement + Legal + Finance\nRenew / renegotiate / exit\nAd-hoc Incident Review\nPer event\nSRE + Security + vendor eng\nPost-mortem document\n10. Vendor Offboarding\nStep 1: Notice of termination issued per contract terms (30–90 days) Step 2: Data\nexport requested from vendor within 5 business days of notice Step 3: Data deletion\nconfirmed in writing from vendor within 30 days of contract end Step 4: IT revokes",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.0248
+          },
+          {
+            "text": "relationships. It is maintained in Notion and updated by the Procurement team within 5 business days of\nany change.\nLocation\nNotion > Procurement > Vendor Registry (restricted access)\nFields\nVendor name, tier, contract owner, contract dates, SLA scorecard, contacts, DPA status\nAccess\nRead: all employees | Write: Procurement team only\nReview Owner\nHead of Procurement — quarterly audit for accuracy\nIntegration\nSynced with Finance ERP for spend tracking\n12. Policy Exceptions",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.0224
+          }
+        ],
+        "answer": "Based on the context, a Tier 1 vendor requires sign-off from the **VP Eng + CFO**. (Source: TechCorp_Vendor_Management_SLA_Policy.pdf)",
+        "retrieval_ms": 129.7,
+        "generation_ms": 1406.8
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "• Approved vendors added to the TechCorp Vendor Registry within 5 business days\n4. SLA Requirements by Tier\nThe following minimum SLA requirements must be contractually guaranteed by vendors in each tier.\nFailure to meet these thresholds triggers the remediation process in Section 7.\nMetric\nTier 1 (Critical)\nTier 2 (Important)\nTier 3 (Standard)\nUptime Guarantee\n99.99% / month\n99.9% / month\n99.5% / month\nPlanned Maintenance\n72h advance notice\n48h advance notice\n24h advance notice\nIncident Respons",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "On request only\n5. Contract Requirements\nAll vendor contracts must include the following clauses:\nMaster Services Agreement (MSA)Governs the overall relationship; must be signed before any SOW\nData Processing Agreement (DPA)Required for any vendor processing personal data (GDPR Article 28)\nSLA Schedule\nExplicit uptime, response, and resolution commitments with remedies\nService Credits\nCredits owed for SLA breaches: typically 10–30% of monthly fee\nTermination for Cause\nRight to terminate within 3",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "data they access.\nTier\nLabel\nCriteria\nExamples\nT1\nCritical\nProduction dependency; handles customer PII or financial data\nAWS, Anthropic, Stripe, PagerDuty\nT2\nImportant\nSignificant workflow dependency; no customer data\nGitHub, Notion, Jira, Slack\nT3\nStandard\nNon-critical tooling; limited data exposure\nFigma, Loom, Calendly\nT4\nLow-risk\nOne-off or trial services; no data sharing\nConference SaaS, survey tools\n3. Vendor Selection Process\n• Business need documented in a Vendor Request Ticket (Jira tem",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Step 1: Notice of termination issued per contract terms (30–90 days) Step 2: Data\nexport requested from vendor within 5 business days of notice Step 3: Data deletion\nconfirmed in writing from vendor within 30 days of contract end Step 4: IT revokes\nSSO access, deactivates API keys, and removes integrations Step 5: Finance cancels PO\nand ensures final invoice settlement Step 6: Vendor marked as 'Offboarded' in Vendor\nRegistry; record retained 7 years Step 7: Lessons learned documented if vendor w",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Subcontractor Approval\nVendor must notify TechCorp before engaging subprocessors\nGoverning Law\nContracts governed by laws of the State of California\n6. Vendor Onboarding\n Step 1: Vendor Request Ticket approved in Jira Step 2: Security questionnaire sent\nand reviewed (SLA: 5 business days) Step 3: Legal redlines exchanged and MSA/DPA\nfinalized Step 4: Finance creates PO; vendor added to approved payment system Step 5:\nIT provisions SSO/SCIM integration (mandatory for T1/T2 SaaS) Step 6: Vendor co",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, the procurement of a Tier 1 vendor requires sign-off from the **VP Eng + CFO**.\n\nSource: [TechCorp_Vendor_Management_SLA_Policy.pdf]",
+        "retrieval_ms": 22.1,
+        "generation_ms": 1306.8
+      }
+    },
+    {
+      "query": "Within how many hours must a data breach be reported by a Tier 2 vendor?",
+      "source_pdf": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "7. SLA Monitoring & Breach Remediation\n• T1 vendors: uptime and incident response tracked in real time via status page integrations\n• Monthly SLA report auto-generated for all T1/T2 vendors and shared with vendor owners\n• Any SLA breach must be formally documented within 48 hours of discovery\n• Service credits claimed within 30 days of breach; tracked in Vendor Registry\nEscalation thresholds:\n1st Breach\nFormal written notice; vendor must provide RCA within 5 business days\n2nd Breach",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.9861
+          },
+          {
+            "text": "4 hours (P1)\nResolution Target\n4 hours (P1)\n8 hours (P1)\n2 business days\nStatus Page\nRequired (public)\nRequired\nRecommended\nSupport Hours\n24/7\nBusiness hours + on-call\nBusiness hours\nData Breach Notice\nWithin 24 hours\nWithin 48 hours\nWithin 72 hours\nAudit Rights\nAnnual + on request\nAnnual\nOn request only\n5. Contract Requirements\nAll vendor contracts must include the following clauses:\nMaster Services Agreement (MSA)Governs the overall relationship; must be signed before any SOW",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.9858
+          },
+          {
+            "text": "4. SLA Requirements by Tier\nThe following minimum SLA requirements must be contractually guaranteed by vendors in each tier.\nFailure to meet these thresholds triggers the remediation process in Section 7.\nMetric\nTier 1 (Critical)\nTier 2 (Important)\nTier 3 (Standard)\nUptime Guarantee\n99.99% / month\n99.9% / month\n99.5% / month\nPlanned Maintenance\n72h advance notice\n48h advance notice\n24h advance notice\nIncident Response\n15 min (P1)\n1 hour (P1)\n4 hours (P1)\nResolution Target\n4 hours (P1)",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.6324
+          },
+          {
+            "text": "Data Processing Agreement (DPA)Required for any vendor processing personal data (GDPR Article 28)\nSLA Schedule\nExplicit uptime, response, and resolution commitments with remedies\nService Credits\nCredits owed for SLA breaches: typically 10–30% of monthly fee\nTermination for Cause\nRight to terminate within 30 days if SLA breach is uncured\nTermination for Convenience\nRight to exit with 90-day notice for T1; 30 days for T2/T3\nIP & Data Ownership",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 0.3422
+          },
+          {
+            "text": "Security breach\nData exfiltration, ransomware\nYes + Legal\n2. Recovery Time Objectives (RTO)\nCore API (production)\nRTO: 30 minutes\nWeb Application\nRTO: 30 minutes\nDatabase (primary)\nRTO: 15 minutes (Aurora auto-failover)\nRAG Pipeline\nRTO: 1 hour\nBackground Jobs\nRTO: 2 hours\nAnalytics / Reporting\nRTO: 4 hours\nInternal Tools\nRTO: 8 hours\n3. Recovery Point Objectives (RPO)\nTransaction Database\nRPO: 5 minutes (Aurora PITR + WAL streaming)\nDocument Store\nRPO: 15 minutes (S3 versioning + replication)",
+            "source": "09_TechCorp_Disaster_Recovery_Plan.pdf",
+            "score": 0.0776
+          }
+        ],
+        "answer": "Based on the context, a Tier 2 vendor must report a data breach within 48 hours.\n\nSource: [TechCorp_Vendor_Management_SLA_Policy.pdf]",
+        "retrieval_ms": 138.4,
+        "generation_ms": 1088.9
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "• Approved vendors added to the TechCorp Vendor Registry within 5 business days\n4. SLA Requirements by Tier\nThe following minimum SLA requirements must be contractually guaranteed by vendors in each tier.\nFailure to meet these thresholds triggers the remediation process in Section 7.\nMetric\nTier 1 (Critical)\nTier 2 (Important)\nTier 3 (Standard)\nUptime Guarantee\n99.99% / month\n99.9% / month\n99.5% / month\nPlanned Maintenance\n72h advance notice\n48h advance notice\n24h advance notice\nIncident Respons",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "• Any SLA breach must be formally documented within 48 hours of discovery\n• Service credits claimed within 30 days of breach; tracked in Vendor Registry\nEscalation thresholds:\n1st Breach\nFormal written notice; vendor must provide RCA within 5 business days\n2nd Breach\nExecutive escalation call; vendor presents remediation plan\n3rd Breach\nContract review triggered; vendor placed on probation status\n4th Breach\nTechCorp may invoke termination for cause; transition planning begins\n8. Data Security & ",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Subcontractor Approval\nVendor must notify TechCorp before engaging subprocessors\nGoverning Law\nContracts governed by laws of the State of California\n6. Vendor Onboarding\n Step 1: Vendor Request Ticket approved in Jira Step 2: Security questionnaire sent\nand reviewed (SLA: 5 business days) Step 3: Legal redlines exchanged and MSA/DPA\nfinalized Step 4: Finance creates PO; vendor added to approved payment system Step 5:\nIT provisions SSO/SCIM integration (mandatory for T1/T2 SaaS) Step 6: Vendor co",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "TechCorp Disaster Recovery Plan\nIncident Classification, RTO/RPO Targets & Recovery Procedures\nVersion: v2.2\nDocument: TC-DRP-009\nTechCorp Internal\n1. Incident Classification\nClass\nScope\nExamples\nDeclares DR\nClass 1\nSingle service failure\nPod crash, API timeout\nNo — SRE handles\nClass 2\nMulti-service or regional impact\nAZ outage, DB failover needed\nOptional\nClass 3\nFull production unavailabilityRegion failure, major data loss\nYes — immediate\nClass 4\nSecurity breach\nData exfiltration, ransomware\nY",
+            "source": "09_TechCorp_Disaster_Recovery_Plan.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Step 1: Notice of termination issued per contract terms (30–90 days) Step 2: Data\nexport requested from vendor within 5 business days of notice Step 3: Data deletion\nconfirmed in writing from vendor within 30 days of contract end Step 4: IT revokes\nSSO access, deactivates API keys, and removes integrations Step 5: Finance cancels PO\nand ensures final invoice settlement Step 6: Vendor marked as 'Offboarded' in Vendor\nRegistry; record retained 7 years Step 7: Lessons learned documented if vendor w",
+            "source": "TechCorp_Vendor_Management_SLA_Policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "According to the context, a Tier 2 vendor must report a data breach within 48 hours.\n\nSource: TechCorp_Vendor_Management_SLA_Policy.pdf",
+        "retrieval_ms": 26.5,
+        "generation_ms": 1611.7
+      }
+    },
+    {
+      "query": "Who is required to follow the Company Code of Conduct and Ethics?",
+      "source_pdf": "Company Code of Conduct and Ethics_FINAL.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "Company Code of Conduct and Ethics \nIntroduction \nThis Company Code of Conduct and Ethics (this “Code”) sets forth legal and ethical standards of \nconduct for personnel of Lantheus Holdings, Inc. and its subsidiaries (collectively, “Lantheus,” the \n“Company” or “we”).  \nThis Code applies to all of the Company’s: \n• \ndirectors; \n• \nofficers; and \n• all other employees (and, for the purposes of this Code, all Lantheus contractors, consultants",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.9957
+          },
+          {
+            "text": "and regulations applicable to the Company wherever it does business, and its policies and \nprocedures in regard to legal and ethical responsibilities.  You are expected to use good judgment \nand common sense in seeking to comply and to ask for advice when you are uncertain about what \nis required. Directors, officers, and employees will be required to review this Code on an annual basis. \nLantheus is committed to the prompt and consistent enforcement of this Code.  Anyone violating",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.9885
+          },
+          {
+            "text": "The Company is committed to adhering to all applicable legal requirements and maintaining the \nhighest standards of conduct and integrity.  This Code is intended to promote those goals in \nconjunction with the Company’s other codes, policies and Employee Handbook.  While this Code is \nextensive, these statements are by no means exhaustive.  They do not represent all the policies and \nprocedures Lantheus personnel must follow.  For example, in addition to the Code, all personnel are",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.9837
+          },
+          {
+            "text": "Company’s Corporate Governance Guidelines and Principles, its Nominating and Corporate \nGovernance Committee Charter, its Audit Committee Charter and its Supplemental Code of Ethics \nfor Certain Covered Officers, each of which is available on Lantheus Central.  \nFull disclosure is the essential first step to remaining in full compliance with this Code.  You must \ndisclose any actual or reasonably apparent conflict of interest, including any existing or proposed",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.8784
+          },
+          {
+            "text": "this Code may be subject to disciplinary action, up to and including, where appropriate and \npermissible, termination.  In special cases, the Company may be obligated to refer violations of this \nCode to appropriate law enforcement or regulatory officials because some such violations may also \nviolate applicable laws, rules or regulations. \nEthics and Compliance \nThe Ethics and Compliance Department is responsible for giving guidance on interpreting and",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.8725
+          }
+        ],
+        "answer": "Based on the context, the Company Code of Conduct and Ethics applies to all of the Company’s directors, officers, and all other employees, as well as Lantheus contractors and consultants. (Source: Company Code of Conduct and Ethics_FINAL.pdf)",
+        "retrieval_ms": 118.8,
+        "generation_ms": 1623.3
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "Company Code of Conduct and Ethics \nIntroduction \nThis Company Code of Conduct and Ethics (this “Code”) sets forth legal and ethical standards of \nconduct for personnel of Lantheus Holdings, Inc. and its subsidiaries (collectively, “Lantheus,” the \n“Company” or “we”).  \nThis Code applies to all of the Company’s: \n• \ndirectors; \n• \nofficers; and \n• all other employees (and, for the purposes of this Code, all Lantheus contractors, consultants \nand vendors working at, and having direct access to, a",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "than contractual obligations or applicable laws, rules and regulations, then personnel must comply \nwith the Code.  \nAll personnel are required to be familiar with the Code and are responsible for complying with this \nCode.  Because a written code cannot answer all questions raised in the context of business \nrelationships, you must take responsibility for recognizing and responding appropriately to specific \nsituations as they arise.  Therefore, it is critically important that you carefully rea",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "The Company is committed to adhering to all applicable legal requirements and maintaining the \nhighest standards of conduct and integrity.  This Code is intended to promote those goals in \nconjunction with the Company’s other codes, policies and Employee Handbook.  While this Code is \nextensive, these statements are by no means exhaustive.  They do not represent all the policies and \nprocedures Lantheus personnel must follow.  For example, in addition to the Code, all personnel are \nrequired to ",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "and regulations applicable to the Company wherever it does business, and its policies and \nprocedures in regard to legal and ethical responsibilities.  You are expected to use good judgment \nand common sense in seeking to comply and to ask for advice when you are uncertain about what \nis required. Directors, officers, and employees will be required to review this Code on an annual basis. \nLantheus is committed to the prompt and consistent enforcement of this Code.  Anyone violating \nthis Code ma",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "for Certain Covered Officers, each of which is available on Lantheus Central.  \nFull disclosure is the essential first step to remaining in full compliance with this Code.  You must \ndisclose any actual or reasonably apparent conflict of interest, including any existing or proposed \ntransaction or relationship that reasonably could be expected to give rise to a conflict of interest.  \nAn employee must disclose such matters to his/her supervisor (or, if that supervisor is involved in the \nmatter,",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, the Company Code of Conduct and Ethics applies to all of the Company’s directors, officers, and all other employees. It also applies to contractors, consultants, and vendors working at or having direct access to any Company site or network. [Company Code of Conduct and Ethics_FINAL.pdf]",
+        "retrieval_ms": 24.2,
+        "generation_ms": 1927.3
+      }
+    },
+    {
+      "query": "What should you do if you have questions about the Code or the appropriateness of an action?",
+      "source_pdf": "Company Code of Conduct and Ethics_FINAL.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "situations as they arise.  Therefore, it is critically important that you carefully read the Code and \nunderstand how the Code applies to you and your colleagues.  \nIf you have any questions about the requirements of this Code or the appropriateness of a \nrelationship or action, you should consult with your supervisor or an appropriate member of \nmanagement, Human Resources, any member of the Legal Department or any member of the Ethics",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.9997
+          },
+          {
+            "text": "If you have a question as to whether an activity is restricted or prohibited, seek assistance before \ntaking any action, including giving any verbal assurances that might be regulated by international \nlaws. \nFair Dealing and Fair Competition \nFair Dealing \nPersonnel should endeavor to deal honestly, ethically and fairly with Lantheus suppliers, customers, \npartners, service providers, competitors, employees and anyone else with whom he or she has",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.8717
+          },
+          {
+            "text": "than contractual obligations or applicable laws, rules and regulations, then personnel must comply \nwith the Code.  \nAll personnel are required to be familiar with the Code and are responsible for complying with this \nCode.  Because a written code cannot answer all questions raised in the context of business \nrelationships, you must take responsibility for recognizing and responding appropriately to specific",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.8253
+          },
+          {
+            "text": "this Code may be subject to disciplinary action, up to and including, where appropriate and \npermissible, termination.  In special cases, the Company may be obligated to refer violations of this \nCode to appropriate law enforcement or regulatory officials because some such violations may also \nviolate applicable laws, rules or regulations. \nEthics and Compliance \nThe Ethics and Compliance Department is responsible for giving guidance on interpreting and",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.3829
+          },
+          {
+            "text": "and Compliance Department.  Please be assured that there will be no retaliation or retribution for \nyour asking questions or raising concerns about reporting possible improper conduct.  You are \nrequired to report suspected violations of this Code promptly as outlined under the heading \n“Reporting Compliance Concerns” below. \nThe success of Lantheus depends on the commitment of everyone to abide by, embrace and live this",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.1202
+          }
+        ],
+        "answer": "Based on the context, if you have questions about the Code or the appropriateness of an action, you should consult with your supervisor, an appropriate member of management, Human Resources, any member of the Legal Department, or any member of the Ethics and Compliance Department. (Source: Company Code of Conduct and Ethics_FINAL.pdf)",
+        "retrieval_ms": 118.4,
+        "generation_ms": 1620.7
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "than contractual obligations or applicable laws, rules and regulations, then personnel must comply \nwith the Code.  \nAll personnel are required to be familiar with the Code and are responsible for complying with this \nCode.  Because a written code cannot answer all questions raised in the context of business \nrelationships, you must take responsibility for recognizing and responding appropriately to specific \nsituations as they arise.  Therefore, it is critically important that you carefully rea",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "Code and/or our other codes and policies), you are required to promptly speak up.  By doing so, you \ngive our Company the opportunity to deal with the issue.  Remaining silent about possible \nmisconduct may worsen a situation and decrease trust.  In particular, if you become aware of, or \nhave reason to suspect, any activity that is criminal in nature or that may involve someone being in \ndanger, you are required to report that activity immediately.   \nOur Company values the help of personnel wh",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "and regulations applicable to the Company wherever it does business, and its policies and \nprocedures in regard to legal and ethical responsibilities.  You are expected to use good judgment \nand common sense in seeking to comply and to ask for advice when you are uncertain about what \nis required. Directors, officers, and employees will be required to review this Code on an annual basis. \nLantheus is committed to the prompt and consistent enforcement of this Code.  Anyone violating \nthis Code ma",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "early to the development team \n3.2.4 \nCycle time \ntime elapsed between the start of the work on a particular task and its completion. \n3.2.5 \nDaily stand-up \nshort daily team meeting where the team members share their project activities, synchronize \nthemselves and identify and solve impediments that hamper them from being productive \nNOTE 1 \nIt is also known as daily meeting, daily Scrum or roll-call. \nNOTE 2 \nDuration of a “Daily stand-up” is about 15 minutes. \n ECSS-E-HB-40-01A \n7 April 2020 ",
+            "source": "Engineering-handbook.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "of a particular task. This code needs to be validated and documented properly. Test driven \nmethodologies are often used during this activity, i.e. the tests are created and in some cases even \nexecuted before the code is written. Although in case of test execution, the test failure may look like an \nobvious outcome, it provides some level of reassurance in the sense that badly written tests may not \nfail if they are targeting the wrong functionality or it may help in identifying issues such a n",
+            "source": "Engineering-handbook.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context, if you have questions about the Code or the appropriateness of an action, you should consult with your supervisor, an appropriate member of management, Human Resources, any member of the Legal Department, or any member of the Ethics and Compliance Department. (Source: Company Code of Conduct and Ethics_FINAL.pdf)",
+        "retrieval_ms": 28.9,
+        "generation_ms": 1501.7
+      }
+    },
+    {
+      "query": "What are the potential consequences for violating this Code?",
+      "source_pdf": "Company Code of Conduct and Ethics_FINAL.pdf",
+      "baseline": {
+        "chunks": [
+          {
+            "text": "this Code may be subject to disciplinary action, up to and including, where appropriate and \npermissible, termination.  In special cases, the Company may be obligated to refer violations of this \nCode to appropriate law enforcement or regulatory officials because some such violations may also \nviolate applicable laws, rules or regulations. \nEthics and Compliance \nThe Ethics and Compliance Department is responsible for giving guidance on interpreting and",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.9554
+          },
+          {
+            "text": "and Compliance Department.  Please be assured that there will be no retaliation or retribution for \nyour asking questions or raising concerns about reporting possible improper conduct.  You are \nrequired to report suspected violations of this Code promptly as outlined under the heading \n“Reporting Compliance Concerns” below. \nThe success of Lantheus depends on the commitment of everyone to abide by, embrace and live this",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.8891
+          },
+          {
+            "text": "any other conduct that you have reason to believe is unlawful; or (vi) testify truthfully in a legal \nproceeding. Specifically, nothing in this Code prohibits you from reporting an event that you \nreasonably and in good faith believe is a violation of law to the relevant local, state or federal \ngovernment agency (such as the SEC, the U.S. Equal Employment Opportunity Commission or the \nU.S. Department of Labor), or from cooperating in an investigation conducted by a government",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.5023
+          },
+          {
+            "text": "security may result in damage to you, our students, or your colleagues through the loss of \ncontrol over personal data or confidential data, identity theft, fraud or financial loss. \nBreaches to this policy also put the College at risk of cyber-threats, legal action and \nregulatory penalties. Additionally, sometimes damages are irreparable and have serious \nreputational consequences.  \n \nThis policy applies to all students, staff including partners, contractors, consultants and",
+            "source": "security-policy.pdf",
+            "score": 0.3672
+          },
+          {
+            "text": "and regulations applicable to the Company wherever it does business, and its policies and \nprocedures in regard to legal and ethical responsibilities.  You are expected to use good judgment \nand common sense in seeking to comply and to ask for advice when you are uncertain about what \nis required. Directors, officers, and employees will be required to review this Code on an annual basis. \nLantheus is committed to the prompt and consistent enforcement of this Code.  Anyone violating",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 0.2427
+          }
+        ],
+        "answer": "Based on the context, potential consequences for violating the Code include disciplinary action, up to and including termination, and referral to law enforcement or regulatory officials if the violation also breaks applicable laws. (Source: Company Code of Conduct and Ethics_FINAL.pdf)",
+        "retrieval_ms": 269.7,
+        "generation_ms": 1269.3
+      },
+      "parent_child": {
+        "chunks": [
+          {
+            "text": "early to the development team \n3.2.4 \nCycle time \ntime elapsed between the start of the work on a particular task and its completion. \n3.2.5 \nDaily stand-up \nshort daily team meeting where the team members share their project activities, synchronize \nthemselves and identify and solve impediments that hamper them from being productive \nNOTE 1 \nIt is also known as daily meeting, daily Scrum or roll-call. \nNOTE 2 \nDuration of a “Daily stand-up” is about 15 minutes. \n ECSS-E-HB-40-01A \n7 April 2020 ",
+            "source": "Engineering-handbook.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "• \nSupplier/service provider lists; \n• \nAcquisition or divestiture of businesses or products or other business development \ntransactions; \n• \nManufacturing processes and know-how; \n• \nWage and salary data;  \n• \nCompany organizational charts;  \n• \nEmployee lists;  \n• \nCapital investment plans;  \n• \nCompany policy or management changes;  \n• \nInformation on inventions, research and test data; \n• \nCompany plans for life cycle management and improving products; and \n• \nOther business strategies and p",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "and regulations applicable to the Company wherever it does business, and its policies and \nprocedures in regard to legal and ethical responsibilities.  You are expected to use good judgment \nand common sense in seeking to comply and to ask for advice when you are uncertain about what \nis required. Directors, officers, and employees will be required to review this Code on an annual basis. \nLantheus is committed to the prompt and consistent enforcement of this Code.  Anyone violating \nthis Code ma",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "proceeding. Specifically, nothing in this Code prohibits you from reporting an event that you \nreasonably and in good faith believe is a violation of law to the relevant local, state or federal \ngovernment agency (such as the SEC, the U.S. Equal Employment Opportunity Commission or the \nU.S. Department of Labor), or from cooperating in an investigation conducted by a government \nagency; provided, however, to the extent permitted by applicable law, you will give the Company as \nmuch advance notic",
+            "source": "Company Code of Conduct and Ethics_FINAL.pdf",
+            "score": 1.0
+          },
+          {
+            "text": "privilege, and therefore only the appropriate level of access will be provided. \n \nNon-compliance of policies puts people and the College at risk. A breach of information \nsecurity may result in damage to you, our students, or your colleagues through the loss of \ncontrol over personal data or confidential data, identity theft, fraud or financial loss. \nBreaches to this policy also put the College at risk of cyber-threats, legal action and \nregulatory penalties. Additionally, sometimes damages ar",
+            "source": "security-policy.pdf",
+            "score": 1.0
+          }
+        ],
+        "answer": "Based on the context provided, violating the Code may result in disciplinary action, up to and including termination. In special cases, the Company may also refer violations to law enforcement or regulatory officials.\n\nSource: Company Code of Conduct and Ethics_FINAL.pdf",
+        "retrieval_ms": 22.8,
+        "generation_ms": 1308.0
+      }
+    }
+  ]
+}

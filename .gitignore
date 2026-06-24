@@ -1,0 +1,16 @@
+__pycache__
+*.pyc
+.git
+.idea
+.claude
+.vscode
+*.egg-info
+venv
+.venv
+.env
+.DS_Store
+qdrant_storage
+n8n_data
+frontend/node_modules
+frontend/dist
+.understand-anything
